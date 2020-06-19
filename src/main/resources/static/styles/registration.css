@@ -1,0 +1,18 @@
+.content{
+    max-width: 800px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 55px;
+    padding-right: 55px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 37px;
+    margin-bottom: 0px;
+    color: #000000;
+}
+
+.display-4{
+    text-align: center;
+}

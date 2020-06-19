@@ -1,0 +1,41 @@
+.header{
+    max-width: none;
+    background: #007765;
+    position: sticky;
+    top: 0;
+}
+
+.logo{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    flex-grow: 1;
+}
+
+.header-content{
+    display: flex;
+    flex-direction: row;
+}
+
+.content{
+    max-width: 1219px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 55px;
+    padding-right: 55px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 37px;
+    margin-bottom: 0px;
+    color: #000000;
+}
+
+.btn_grp{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}

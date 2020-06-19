@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/styles/registration.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<div class="content jumbotron justify-content-md-center">
+    <h1 class="display-4">Registration form</h1>
+<form action="/registration" th:action="@{/registration}" th:object="${registrationForm}" method="post">
+    <div class="col-md ">
+        <label>First name</label>
+        <input type="text" th:field="*{username}" class="form-control"
+               th:classappend="${not #lists.isEmpty(#fields.errors('username'))} ? (is-invalid) : (is-valid)"
+               required>
+        <div class="invalid-feedback">
+            <p th:each="error: ${#fields.errors('username')}" th:text="${error}">Invalid data</p>
+        </div>
+    </div>
+    <div class="col-md ">
+        <label >Password</label>
+        <input type="password" class="form-control" th:field="*{password}"
+               th:classappend="${not #lists.isEmpty(#fields.errors('password'))} ? (is-invalid) : (is-valid)"
+               required>
+        <div class="invalid-feedback">
+            <p th:each="error: ${#fields.errors('password')}" th:text="${error}">Invalid data</p>
+        </div>
+    </div>
+    <div class="col-md ">
+        <label >Confirm password</label>
+        <input type="password" class="form-control" th:field="*{confirmPassword}"
+               th:classappend="${not #lists.isEmpty(#fields.errors('password'))} ? (is-invalid) : (is-valid)"
+               required>
+    </div>
+    <div class="col-md ">
+        <label >Email</label>
+        <input type="text" class="form-control" th:field="*{email}"
+               th:classappend="${not #lists.isEmpty(#fields.errors('email'))} ? (is-invalid) : (is-valid)"
+               required>
+        <div class="invalid-feedback">
+            <p th:each="error: ${#fields.errors('email')}" th:text="${error}">Invalid data</p>
+        </div>
+    </div>
+    <div class="col-md ">
+        <label >Age</label>
+        <input type="text" class="form-control" th:field="*{age}"
+               th:classappend="${not #lists.isEmpty(#fields.errors('age'))} ? (is-invalid) : (is-valid)"
+               required>
+        <div class="invalid-feedback">
+            <p th:each="error: ${#fields.errors('age')}" th:text="${error}">Invalid data</p>
+        </div>
+    </div>
+    <!--<div class="col-md-3 mb-3">
+        <label>State</label>
+        <select class="custom-select is-invalid" id="validationServer04" required>
+            <option selected disabled value="">Choose...</option>
+            <option>...</option>
+        </select>
+        <div class="invalid-feedback">
+            Please select a valid state.
+        </div>
+    </div>-->
+    <button class="btn btn-primary btn-dark float-right" type="submit">Sign up!</button>
+</form>
+</div>
+<script src="/scripts/registration.js"></script>
+</body>
+</html>

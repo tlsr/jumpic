@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div>
+    <form method="post" id="addQuizButton" action="addQuiz">
+        <input type="text" id="questionField" name="question" placeholder="Enter question text" />
+        <button type="submit" >Добавить</button>
+    </form>
+    <div><a href="all">list</a> of quizes in course</div>
+</div>
+<div>
+    <form action="/logout" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
+<script src="/scripts/editor.js"></script>
+</body>
+</html>

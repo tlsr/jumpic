@@ -18,6 +18,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
 <form th:action="@{/user/{id}(id=${user.id})}" th:object="${user}" method="post">
     <table class="table">
         <thead class="thead-dark">

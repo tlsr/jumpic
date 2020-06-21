@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/static/styles/main.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <!-- JS, Popper.js, and jQuery -->
@@ -11,22 +11,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">CN</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Портфолио<span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-
-    </div>
-</nav>
+<div th:replace="fragments/header :: header"></div>
 <div> Welcome, anon. Please log in</div>
 <div class="btn_grp">
     <a href="editor" type="button" class="btn btn-primary btn-dark btn-lg">Log in</a>

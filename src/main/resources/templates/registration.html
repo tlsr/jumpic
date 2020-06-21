@@ -18,7 +18,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-
+<div th:replace="fragments/header :: header"></div>
 <div class="content jumbotron justify-content-md-center">
     <h1 class="display-4">Registration form</h1>
 <form action="/registration" th:action="@{/registration}" th:object="${registrationForm}" method="post">

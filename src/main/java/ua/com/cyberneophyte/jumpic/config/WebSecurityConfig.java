@@ -8,17 +8,17 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import ua.com.cyberneophyte.jumpic.service.UserService;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true,prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsService userService;
+    private final UserService userService;
 
-    public WebSecurityConfig(UserDetailsService userService) {
+    public WebSecurityConfig(UserService userService) {
         this.userService = userService;
     }
 
@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                     .authorizeRequests()
-                    .antMatchers("/","/registration","/styles/**","/scripts/**").permitAll()
+                    .antMatchers("/", "/registration", "/styles/**", "/scripts/**","/logout","/errorPages/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -41,7 +41,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .logout()
                     .logoutSuccessUrl("/index.html")
-                    .permitAll();
+                    .permitAll()
+                .and()
+                    .exceptionHandling()
+                    .accessDeniedPage("/errorPages/accessDenied.html");
     }
 
     @Override

@@ -9,7 +9,7 @@ public class RegistrationForm {
     @Size(min = 4, max = 50)
     private String username;
     @NotNull
-    @Size(min = 8, max = 24)
+    /*@Size(min = 8, max = 24)*/
     /*@Pattern(regexp = "(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}",
             message = "{password.doesnt.match.pattern}")*/
     private String password;

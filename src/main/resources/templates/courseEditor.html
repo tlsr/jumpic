@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link rel="stylesheet" href="/static/styles/main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<form action="/courseEditor" th:action="@{/courseEditor}" th:object="${courseInfoForm}" method="post">
+    <div class="col-md ">
+        <label>Title</label>
+        <input type="text" th:field="*{title}" class="form-control"
+               th:classappend="${not #lists.isEmpty(#fields.errors('title'))} ? (is-invalid) : (is-valid)"
+               required>
+        <div class="invalid-feedback">
+            <p th:each="error: ${#fields.errors('title')}" th:text="${error}">Invalid data</p>
+        </div>
+        <label>Tags(add comma separated tags )</label>
+        <input type="text" th:field="*{tags}" class="form-control"
+               th:classappend="${not #lists.isEmpty(#fields.errors('tags'))} ? (is-invalid) : (is-valid)"
+               required>
+        <div class="invalid-feedback">
+            <p th:each="error: ${#fields.errors('tags')}" th:text="${error}">Invalid data</p>
+        </div>
+        <label>Expeted time to finish course</label>
+        <input type="text" th:field="*{estimatedTimeToFinish}" class="form-control"
+               th:classappend="${not #lists.isEmpty(#fields.errors('estimatedTimeToFinish'))} ? (is-invalid) : (is-valid)"
+               required>
+        <div class="invalid-feedback">
+            <p th:each="error: ${#fields.errors('estimatedTimeToFinish')}" th:text="${error}">Invalid data</p>
+        </div>
+    </div>
+    <button class="btn btn-primary btn-dark float-right" type="submit">Create course</button>
+</form>
+</body>
+</html>

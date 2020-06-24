@@ -27,6 +27,11 @@
                     <a href="/user" type="button" class="btn btn-primary btn-dark">User List</a>
                 </div>
             </li>
+            <li class="nav-item" sec:authorize="hasAuthority('USER')">
+                <div >
+                    <a href="/courseEditor" type="button" class="btn btn-primary btn-dark">Become a teacher</a>
+                </div>
+            </li>
         </ul>
         <div class="nav-text text-light" sec:authorize="isAuthenticated()">
             <span sec:authentication="name"></span>

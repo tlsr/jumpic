@@ -36,7 +36,6 @@ public class QuizController {
 
     @GetMapping(path = "/all")
     public String getAllQuizzes(Map<String, Object> model) {
-        // This returns a JSON or XML with the users
         Iterable<Quiz> all = quizRepo.findAll();
         model.put("Quizes", all);
         logger.info("showing all quizes to database");

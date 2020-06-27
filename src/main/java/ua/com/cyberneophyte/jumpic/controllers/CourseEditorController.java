@@ -37,13 +37,13 @@ public class CourseEditorController {
         } else {
             Course course = courseService.createCourseFromCourseInfoForm(courseInfoForm, user);
             courseService.saveCourse(course);
-            return "redirect:/courseView/"+course.getId();
+            return "redirect:/courseView/"+course.getCourseInfo().getId();
         }
     }
 
-    @GetMapping("/courseView/{course}")
-    public String displayCourse(Model model, Course course){
-        model.addAttribute("course",course);
+    @GetMapping("/courseView/{courseInfo}")
+    public String displayCourse(Model model, CourseInfo courseInfo){
+        model.addAttribute("courseInfo",courseInfo);
         return "/courseView";
     }
 }

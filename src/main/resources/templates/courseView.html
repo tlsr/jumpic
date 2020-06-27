@@ -12,10 +12,11 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-<div th:text="${course.courseInfo.title}"></div>
-<div th:text="${course.courseInfo.author.username}"></div>
-<div th:text="${course.courseInfo.estimatedTimeToFinish}"></div>
-<div th:each="tag : ${course.courseInfo.tags}">
+<div th:text="${courseInfo.title}"></div>
+<div th:text="${courseInfo.author.username}"></div>
+<div th:text="${courseInfo.description}"></div>
+<div th:text="${courseInfo.estimatedTimeToFinish}"></div>
+<div th:each="tag : ${courseInfo.tags}">
     <div th:text="${tag}"></div>
 </div>
 

@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "courses")
 public class Course {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn( name = "courseinfo_id" )

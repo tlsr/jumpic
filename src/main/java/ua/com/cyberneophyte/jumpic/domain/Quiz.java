@@ -7,7 +7,7 @@ import javax.persistence.Id;
 @Entity
 public class Quiz {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     private String question;
 

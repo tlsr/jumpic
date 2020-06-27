@@ -28,6 +28,13 @@
         <div class="invalid-feedback">
             <p th:each="error: ${#fields.errors('tags')}" th:text="${error}">Invalid data</p>
         </div>
+            <label>Description</label>
+            <textarea  th:field="*{description}" class="form-control"
+                   th:classappend="${not #lists.isEmpty(#fields.errors('description'))} ? (is-invalid) : (is-valid)"
+                       required></textarea>
+            <div class="invalid-feedback">
+                <p th:each="error: ${#fields.errors('description')}" th:text="${error}">Invalid data</p>
+            </div>
         <label>Expeted time to finish course</label>
         <input type="text" th:field="*{estimatedTimeToFinish}" class="form-control"
                th:classappend="${not #lists.isEmpty(#fields.errors('estimatedTimeToFinish'))} ? (is-invalid) : (is-valid)"

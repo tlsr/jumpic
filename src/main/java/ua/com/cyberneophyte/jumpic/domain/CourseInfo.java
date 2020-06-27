@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 @Table(name = "courseInfo")
 public class CourseInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne(mappedBy = "courseInfo")
     private Course course;
@@ -31,6 +31,16 @@ public class CourseInfo {
     private Set<String> tags;
     private Integer estimatedTimeToFinish;
     private Integer points;
+    @Lob
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public CourseInfo() {
     }
@@ -44,6 +54,7 @@ public class CourseInfo {
                 .collect(Collectors.toSet());
         this.setTags(tags);
         this.setAuthor(user);
+        this.setDescription(courseInfoForm.getDescription());
         this.setCourse(course);
     }
 

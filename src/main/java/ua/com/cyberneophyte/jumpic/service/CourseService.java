@@ -3,10 +3,13 @@ package ua.com.cyberneophyte.jumpic.service;
 import org.springframework.stereotype.Service;
 import ua.com.cyberneophyte.jumpic.domain.Course;
 import ua.com.cyberneophyte.jumpic.domain.CourseInfo;
+import ua.com.cyberneophyte.jumpic.domain.Module;
 import ua.com.cyberneophyte.jumpic.domain.User;
 import ua.com.cyberneophyte.jumpic.forms.CourseInfoForm;
 import ua.com.cyberneophyte.jumpic.repos.CourseInfoRepo;
 import ua.com.cyberneophyte.jumpic.repos.CourseRepo;
+
+import java.util.List;
 
 @Service
 public class CourseService {
@@ -39,6 +42,11 @@ public class CourseService {
         CourseInfo courseInfo = new CourseInfo(courseInfoForm, user, course);
         course.setCourseInfo(courseInfo);
         return course;
+    }
+
+    public void addModuleToCourse(Module module, Course course){
+        List<Module> listOfModules = course.getListOfModules();
+        listOfModules.add(module);
     }
 
 }

@@ -8,10 +8,10 @@ import ua.com.cyberneophyte.jumpic.repos.CourseInfoRepo;
 import ua.com.cyberneophyte.jumpic.repos.CourseRepo;
 
 @Controller
-public class HomePageController {
+public class MainPageController {
     private final CourseInfoRepo courseInfoRepo;
 
-    public HomePageController(CourseInfoRepo courseInfoRepo) {
+    public MainPageController(CourseInfoRepo courseInfoRepo) {
         this.courseInfoRepo = courseInfoRepo;
     }
 

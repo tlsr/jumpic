@@ -7,11 +7,15 @@ import javax.validation.constraints.*;
 public class RegistrationForm {
     @NotNull
     @Size(min = 4, max = 50)
+    @Pattern(regexp = "^[a-zA-Z0-9_-]+",
+            message = "{username.doesnt.match.pattern}")
     private String username;
     @NotNull
-    /*@Size(min = 8, max = 24)*/
-    /*@Pattern(regexp = "(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}",
-            message = "{password.doesnt.match.pattern}")*/
+    /* Password matching expression. Password must be at least 8 characters,
+    no more than 16 characters, and must include at least one upper case letter,
+    one lower case letter, and one numeric digit.*/
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$",
+            message = "{password.doesnt.match.pattern}")
     private String password;
     private String confirmPassword;
     @Max(value = 110, message = "{too.old}")

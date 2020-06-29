@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="/styles/registration.css">
+    <link rel="stylesheet" href="/styles/registration.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"/>
 
     <!-- JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -26,7 +26,7 @@
         <label>First name</label>
         <input type="text" th:field="*{username}" class="form-control"
                th:classappend="${not #lists.isEmpty(#fields.errors('username'))} ? (is-invalid) : (is-valid)"
-               required>
+               required =""/>
         <div class="invalid-feedback">
             <p th:each="error: ${#fields.errors('username')}" th:text="${error}">Invalid data</p>
         </div>
@@ -35,7 +35,7 @@
         <label >Password</label>
         <input type="password" class="form-control" th:field="*{password}"
                th:classappend="${not #lists.isEmpty(#fields.errors('password'))} ? (is-invalid) : (is-valid)"
-               required>
+               required=""/>
         <div class="invalid-feedback">
             <p th:each="error: ${#fields.errors('password')}" th:text="${error}">Invalid data</p>
         </div>
@@ -44,22 +44,22 @@
         <label >Confirm password</label>
         <input type="password" class="form-control" th:field="*{confirmPassword}"
                th:classappend="${not #lists.isEmpty(#fields.errors('password'))} ? (is-invalid) : (is-valid)"
-               required>
+               required=""/>
     </div>
     <div class="col-md ">
         <label >Email</label>
         <input type="text" class="form-control" th:field="*{email}"
                th:classappend="${not #lists.isEmpty(#fields.errors('email'))} ? (is-invalid) : (is-valid)"
-               required>
+               required=""/>
         <div class="invalid-feedback">
             <p th:each="error: ${#fields.errors('email')}" th:text="${error}">Invalid data</p>
         </div>
     </div>
     <div class="col-md ">
         <label >Age</label>
-        <input type="text" class="form-control" th:field="*{age}"
+        <input type="number" class="form-control" th:field="*{age}"
                th:classappend="${not #lists.isEmpty(#fields.errors('age'))} ? (is-invalid) : (is-valid)"
-               required>
+               required=""/>
         <div class="invalid-feedback">
             <p th:each="error: ${#fields.errors('age')}" th:text="${error}">Invalid data</p>
         </div>

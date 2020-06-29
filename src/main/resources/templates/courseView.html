@@ -19,7 +19,6 @@
 <div th:each="tag : ${courseInfo.tags}">
     <div th:text="${tag}"></div>
 </div>
-
-
+<a th:href="@{/courseEditor/{id}(id=${courseInfo.course.id})}">Edit</a>
 </body>
 </html>

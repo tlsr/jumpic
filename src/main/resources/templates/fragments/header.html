@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
 </head>
 <body>
 <nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark" th:fragment="header">
@@ -31,7 +31,7 @@
             </li>
             <li class="nav-item" sec:authorize="hasAuthority('USER')">
                 <div>
-                    <a href="/courseEditor" type="button" class="btn btn-primary btn-dark">Become a teacher</a>
+                    <a href="/courseInfoEditor" type="button" class="btn btn-primary btn-dark">Become a teacher</a>
                 </div>
             </li>
         </ul>

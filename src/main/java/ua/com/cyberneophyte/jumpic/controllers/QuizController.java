@@ -13,14 +13,14 @@ import java.util.Map;
 
 @Controller
 public class QuizController {
-    private final Logger logger = LoggerFactory.getLogger(QuizController.class);
+  /*  private final Logger logger = LoggerFactory.getLogger(QuizController.class);
     private final QuizRepo quizRepo;
 
     public QuizController(QuizRepo quizRepo) {
         this.quizRepo = quizRepo;
-    }
+    }*/
 
-    @PostMapping(path = "/addQuiz")
+  /*  @PostMapping(path = "/addQuiz")
     public String addNewQuiz(@RequestParam String question) {
         Quiz n = new Quiz();
         n.setQuestion(question);
@@ -40,5 +40,5 @@ public class QuizController {
         model.put("Quizes", all);
         logger.info("showing all quizes to database");
         return "QuizeList";
-    }
+    }*/
 }

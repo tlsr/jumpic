@@ -16,7 +16,7 @@ import ua.com.cyberneophyte.jumpic.repos.UserRepo;
 
 @Controller
 @RequestMapping("/user")
-@PreAuthorize("hasAuthority('ADMIN')")
+//@PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
     private final UserRepo userRepo;
 

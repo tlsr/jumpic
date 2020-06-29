@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import ua.com.cyberneophyte.jumpic.repos.UserRepo;
 
 @Controller
 @RequestMapping("/user")
-//@PreAuthorize("hasAuthority('ADMIN')")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
     private final UserRepo userRepo;
 
@@ -39,7 +40,7 @@ public class UserController {
 
     @PostMapping("{user}")
     public String updateUser(User user,
-                             Model model,Role role){
+                             Model model){
         model.addAttribute("user",user);
         model.addAttribute("roles",Role.values());
         userRepo.save(user);

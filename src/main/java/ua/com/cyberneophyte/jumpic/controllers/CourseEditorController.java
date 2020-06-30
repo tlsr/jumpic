@@ -1,70 +1,49 @@
 package ua.com.cyberneophyte.jumpic.controllers;
 
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ua.com.cyberneophyte.jumpic.domain.Course;
-import ua.com.cyberneophyte.jumpic.domain.CourseInfo;
 import ua.com.cyberneophyte.jumpic.domain.Module;
-import ua.com.cyberneophyte.jumpic.domain.User;
-import ua.com.cyberneophyte.jumpic.forms.CourseInfoForm;
 import ua.com.cyberneophyte.jumpic.service.CourseService;
-
-import javax.validation.Valid;
-import java.util.List;
+import ua.com.cyberneophyte.jumpic.service.ModuleService;
 
 @Controller
+@RequestMapping("/courseEditor")
 public class CourseEditorController {
     private final CourseService courseService;
+    private final ModuleService moduleService;
 
-    public CourseEditorController(CourseService courseService) {
+    public CourseEditorController(CourseService courseService,ModuleService moduleService) {
         this.courseService = courseService;
+        this.moduleService = moduleService;
     }
 
-
-    @GetMapping("/courseInfoEditor")
-    public String getCourseEditorPage(CourseInfoForm courseInfoForm){
-        return "courseInfoEditor";
-    }
-
-    @PostMapping("/courseInfoEditor")
-    public String submitForm(Model model, @Valid CourseInfoForm courseInfoForm,
-                             BindingResult bindingResult, Authentication authentication){
-        User user =(User) authentication.getPrincipal();
-        if (bindingResult.hasErrors()) {
-            return "courseInfoEditor";
-        } else {
-            Course course = courseService.createCourseFromCourseInfoForm(courseInfoForm, user);
-            courseService.saveCourse(course);
-            return "redirect:/courseView/"+course.getCourseInfo().getId();
-        }
-    }
-
-    @GetMapping("/courseEditor/{course}")
-    public String showCourseEditorTemplate(Model model, Module module,Course course){
+    @GetMapping("/{course}")
+    public String showCourseEditorTemplate(Model model, Module module, Course course){
         model.addAttribute("course",course);
         model.addAttribute("module",module);
         return "/courseEditor";
     }
 
-    @PostMapping("/courseEditor/{course}")
+    @PostMapping("/{course}/addModule")
     public String addModuleToCourse(Model model, Module module, Course course){
-        courseService.addModuleToCourse(module,course);
+        System.out.println(module.getModuleName());
+        System.out.println(course.getCourseInfo().getTitle());
+        courseService.addModuleToCourseAndSaveCourse(module,course);
         courseService.saveCourse(course);
         model.addAttribute("course",course);
         model.addAttribute("module",module);
         return "/courseEditor";
     }
 
-    @GetMapping("/courseView/{courseInfo}")
-    public String displayCourse(Model model, CourseInfo courseInfo){
-        model.addAttribute("courseInfo",courseInfo);
-        return "/courseView";
+    @PostMapping("/{course}/deleteModule/{module}")
+    public String deleteModuleToCourse(Model model, Module module, Course course){
+        courseService.deleteModuleFromCourseAndSaveCourse(module,course);
+        model.addAttribute("course",course);
+        model.addAttribute("module",module);
+        return "redirect:/courseEditor/{course}";
     }
-
-   /* @GetMapping()
-    public String deleteModule()*/
 }

@@ -15,10 +15,12 @@ import java.util.List;
 public class CourseService {
     private final CourseRepo courseRepo;
     private final CourseInfoRepo courseInfoRepo;
+    private final ModuleService moduleService;
 
-    public CourseService(CourseRepo courseRepo, CourseInfoRepo courseInfoRepo) {
+    public CourseService(CourseRepo courseRepo, CourseInfoRepo courseInfoRepo, ModuleService moduleService) {
         this.courseRepo = courseRepo;
         this.courseInfoRepo = courseInfoRepo;
+        this.moduleService = moduleService;
     }
 
     public Course findCourseById(Long courseId) {
@@ -44,9 +46,18 @@ public class CourseService {
         return course;
     }
 
-    public void addModuleToCourse(Module module, Course course){
+    public void addModuleToCourseAndSaveCourse(Module module, Course course){
         List<Module> listOfModules = course.getListOfModules();
         listOfModules.add(module);
+        moduleService.saveModule(module);
+        courseRepo.save(course);
+    }
+
+    public void deleteModuleFromCourseAndSaveCourse(Module module, Course course){
+        List<Module> listOfModules = course.getListOfModules();
+        listOfModules.remove(module);
+        moduleService.deleteModule(module);
+        courseRepo.save(course);
     }
 
 }

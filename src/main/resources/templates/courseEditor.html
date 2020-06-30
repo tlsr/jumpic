@@ -23,43 +23,27 @@
     <div class="module_container d-flex" th:each="existingmodule : ${course.listOfModules}">
         <div class="p-2" th:text="${existingmodule.moduleName}"></div>
         <div class="ml-auto p-2">
-            <a href="/index" type="button" class="btn btn-primary">Delete Module</a>
+            <form th:action="@{'/courseEditor/'+${course.id}+'/deleteModule/'+${existingmodule.id}}"
+                  method="post">
+            <input type="submit" class="btn btn-primary" value="Delete Module"></input>
+            </form>
         </div>
+      <!--  <div class="ml-auto p-2">
+            <form th:action="@{'/courseEditor/'+${course.id}+'/editModule/'+${existingmodule.id}}"
+                  method="post">
+                <input type="submit" class="btn btn-primary" value="Edit module"></input>
+            </form>
+        </div>-->
     </div>
     <div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModuleModal"
+        <button type="button" class="btn btn-primary" data-toggle="modal"   data-target="#addModuleModal"
         >Add Module
         </button>
     </div>
 
 </div>
 
+<div th:replace="fragments/modalFormForModuleEdit :: modalFormForModuleEdit ('addModule')"></div>
 
-<div class="modal fade" id="addModuleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <form th:action="@{/courseEditor/{id}(id=${course.id})}" th:object="${module}" method="post">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New module</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                    <div class="form-group">
-                        <label for="module-name" class="col-form-label">Module name</label>
-                        <input type="text" th:field="*{moduleName}" class="form-control" id="module-name">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
 </body>
 </html>

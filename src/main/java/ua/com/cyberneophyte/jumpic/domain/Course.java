@@ -13,9 +13,8 @@ public class Course {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "courseinfo_id")
     private CourseInfo courseInfo;
-    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "course", orphanRemoval = true, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Module> listOfModules;
-
 
 
     public List<Module> getListOfModules() {

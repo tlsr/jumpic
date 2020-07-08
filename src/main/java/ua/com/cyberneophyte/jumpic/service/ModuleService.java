@@ -16,7 +16,6 @@ public class ModuleService {
     @Transactional
     public void deleteModule(Module module) {
         moduleRepo.deleteModuleById(module.getId());
-        System.out.println("in delete");
     }
 
     public void saveModule(Module module){

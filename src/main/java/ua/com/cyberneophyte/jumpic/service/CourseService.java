@@ -1,5 +1,6 @@
 package ua.com.cyberneophyte.jumpic.service;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.stereotype.Service;
 import ua.com.cyberneophyte.jumpic.domain.Course;
 import ua.com.cyberneophyte.jumpic.domain.CourseInfo;
@@ -9,6 +10,8 @@ import ua.com.cyberneophyte.jumpic.forms.CourseInfoForm;
 import ua.com.cyberneophyte.jumpic.repos.CourseInfoRepo;
 import ua.com.cyberneophyte.jumpic.repos.CourseRepo;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -57,6 +60,19 @@ public class CourseService {
         List<Module> listOfModules = course.getListOfModules();
         listOfModules.remove(module);
         moduleService.deleteModule(module);
+        courseRepo.save(course);
+    }
+
+    public void editModuleInCourseAndSaveCourse(Module module,Course course){
+        List<Module> listOfModules =  course.getListOfModules();
+        Iterator<Module> iterator = listOfModules.iterator();
+        while (iterator.hasNext()){
+            Module temp = iterator.next();
+            if (temp.getId()==module.getId()){
+                temp.setModuleName(module.getModuleName());
+            }
+        }
+        moduleService.saveModule(module);
         courseRepo.save(course);
     }
 

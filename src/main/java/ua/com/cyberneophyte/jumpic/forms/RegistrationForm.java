@@ -14,8 +14,8 @@ public class RegistrationForm {
     /* Password matching expression. Password must be at least 8 characters,
     no more than 16 characters, and must include at least one upper case letter,
     one lower case letter, and one numeric digit.*/
-    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$",
-            message = "{password.doesnt.match.pattern}")
+/*    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$",
+            message = "{password.doesnt.match.pattern}")*/
     private String password;
     private String confirmPassword;
     @Max(value = 110, message = "{too.old}")

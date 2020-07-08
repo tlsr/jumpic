@@ -22,7 +22,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private  PasswordEncoder passwordEncoder;
 
-//PasswordEncoder passwordEncoder  this.passwordEncoder = passwordEncoder;
     public WebSecurityConfig(UserService userService) {
         this.userService = userService;
 
@@ -43,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                     .authorizeRequests()
-                    .antMatchers("/", "/registration", "/styles/**", "/scripts/**","/logout","/errorPages/**").permitAll()
+                    .antMatchers("/", "/registration","/fonts/**", "/styles/**", "/scripts/**","/logout","/errorPages/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()

@@ -1,49 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <link rel="stylesheet" href="/static/styles/main.css">
+    <link rel="stylesheet" href="/styles/main.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-    <!-- JS, Popper.js, and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-            crossorigin="anonymous"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
-    <div class="module_container d-flex" th:each="existingmodule : ${course.listOfModules}">
-        <div class="p-2" th:text="${existingmodule.moduleName}"></div>
-        <div class="ml-auto p-2">
+    <div class="module-container d-flex" th:each="existingmodule : ${course.listOfModules}">
+        <div class="p-2 mr-auto" th:id="${existingmodule.id}" th:text="${existingmodule.moduleName}"></div>
+        <div class="p-2">
             <form th:action="@{'/courseEditor/'+${course.id}+'/deleteModule/'+${existingmodule.id}}"
                   method="post">
-            <input type="submit" class="btn btn-primary" value="Delete Module"></input>
+                <button type="submit" class="btn btn-primary">
+                    <img src="/fonts/bootstrap-icons/trash.svg" alt="" title="Delete"/>
+                </button>
             </form>
         </div>
-      <!--  <div class="ml-auto p-2">
-            <form th:action="@{'/courseEditor/'+${course.id}+'/editModule/'+${existingmodule.id}}"
-                  method="post">
-                <input type="submit" class="btn btn-primary" value="Edit module"></input>
-            </form>
-        </div>-->
+        <div class=" p-2">
+            <button type="button" id="edit-module-modal-form" class="btn btn-primary edit-button"
+                    th:value="${existingmodule.id}"
+            ><img src="/fonts/bootstrap-icons/pencil.svg" alt="" title="Edit"/></span>
+            </button>
+        </div>
     </div>
     <div>
-        <button type="button" class="btn btn-primary" data-toggle="modal"   data-target="#addModuleModal"
+        <button type="button" id="add-module-modal-form" class="btn btn-primary"
         >Add Module
         </button>
     </div>
-
 </div>
 
-<div th:replace="fragments/modalFormForModuleEdit :: modalFormForModuleEdit ('addModule')"></div>
+<div th:replace="fragments/modalFormForModuleEdit"></div>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" th:src="@{'/scripts/courseEditor.js'}"></script>
 
 </body>
 </html>

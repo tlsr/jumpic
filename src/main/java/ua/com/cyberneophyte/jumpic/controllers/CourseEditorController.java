@@ -30,13 +30,18 @@ public class CourseEditorController {
 
     @PostMapping("/{course}/addModule")
     public String addModuleToCourse(Model model, Module module, Course course){
-        System.out.println(module.getModuleName());
-        System.out.println(course.getCourseInfo().getTitle());
         courseService.addModuleToCourseAndSaveCourse(module,course);
-        courseService.saveCourse(course);
         model.addAttribute("course",course);
         model.addAttribute("module",module);
-        return "/courseEditor";
+        return "redirect:/courseEditor/{course}";
+    }
+
+    @PostMapping("/{course}/editModule/{module}")
+    public String editModuleInCourse(Model model, Module module, Course course){
+        courseService.editModuleInCourseAndSaveCourse(module,course);
+        model.addAttribute("course",course);
+        model.addAttribute("module",module);
+        return "redirect:/courseEditor/{course}";
     }
 
     @PostMapping("/{course}/deleteModule/{module}")

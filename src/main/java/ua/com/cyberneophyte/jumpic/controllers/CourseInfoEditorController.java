@@ -14,6 +14,9 @@ import ua.com.cyberneophyte.jumpic.forms.CourseInfoForm;
 import ua.com.cyberneophyte.jumpic.service.CourseService;
 
 import javax.validation.Valid;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.List;
 
 @Controller

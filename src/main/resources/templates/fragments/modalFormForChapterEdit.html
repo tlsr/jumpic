@@ -6,9 +6,9 @@
 </head>
 <body>
 
-<div class="modal fade"  th:id="modal-form-module-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true" th:fragment="modalFormForModuleEdit">
-    <form th:id="add-edit-form"  th:object="${module}" method="post">
+<div class="modal fade"  th:id="modal-form-chapter-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true" th:fragment="modalFormFoChapterEdit">
+    <form th:id="add-edit-form"  th:object="${chapter}" method="post">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -20,7 +20,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="module-name" id="modal-label-input" class="col-form-label">Module name</label>
-                        <input type="text" th:field="*{moduleName}" class="form-control" id="module-name">
+                        <input type="text" th:field="*{chapterName}" class="form-control" id="module-name">
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                     </div>
                 </div>

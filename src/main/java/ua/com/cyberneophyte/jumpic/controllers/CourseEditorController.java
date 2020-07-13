@@ -1,10 +1,12 @@
 package ua.com.cyberneophyte.jumpic.controllers;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ua.com.cyberneophyte.jumpic.domain.Chapter;
 import ua.com.cyberneophyte.jumpic.domain.Course;
 import ua.com.cyberneophyte.jumpic.domain.Module;
 import ua.com.cyberneophyte.jumpic.service.CourseService;
@@ -22,9 +24,11 @@ public class CourseEditorController {
     }
 
     @GetMapping("/{course}")
-    public String showCourseEditorTemplate(Model model, Module module, Course course){
+    @PreAuthorize("#course.courseInfo.author.id == authentication.principal.id")
+    public String showCourseEditorTemplate(Model model, Module module, Course course,Chapter chapter){
         model.addAttribute("course",course);
         model.addAttribute("module",module);
+        model.addAttribute("chapter",chapter);
         return "/courseEditor";
     }
 
@@ -51,4 +55,6 @@ public class CourseEditorController {
         model.addAttribute("module",module);
         return "redirect:/courseEditor/{course}";
     }
+
+
 }

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <link rel="stylesheet" href="/static/styles/main.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/styles/main.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"/>
 
     <!-- JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -17,28 +17,28 @@
         <label>Title</label>
         <input type="text" th:field="*{title}" class="form-control"
                th:classappend="${not #lists.isEmpty(#fields.errors('title'))} ? (is-invalid) : (is-valid)"
-               required>
+               required="true"/>
         <div class="invalid-feedback">
             <p th:each="error: ${#fields.errors('title')}" th:text="${error}">Invalid data</p>
         </div>
         <label>Tags(add comma separated tags )</label>
         <input type="text" th:field="*{tags}" class="form-control"
                th:classappend="${not #lists.isEmpty(#fields.errors('tags'))} ? (is-invalid) : (is-valid)"
-               required>
+               required="true"/>
         <div class="invalid-feedback">
             <p th:each="error: ${#fields.errors('tags')}" th:text="${error}">Invalid data</p>
         </div>
             <label>Description</label>
             <textarea  th:field="*{description}" class="form-control"
                    th:classappend="${not #lists.isEmpty(#fields.errors('description'))} ? (is-invalid) : (is-valid)"
-                       required></textarea>
+                       required="true"></textarea>
             <div class="invalid-feedback">
                 <p th:each="error: ${#fields.errors('description')}" th:text="${error}">Invalid data</p>
             </div>
         <label>Expeted time to finish course</label>
         <input type="text" th:field="*{estimatedTimeToFinish}" class="form-control"
                th:classappend="${not #lists.isEmpty(#fields.errors('estimatedTimeToFinish'))} ? (is-invalid) : (is-valid)"
-               required>
+               required="true"/>
         <div class="invalid-feedback">
             <p th:each="error: ${#fields.errors('estimatedTimeToFinish')}" th:text="${error}">Invalid data</p>
         </div>

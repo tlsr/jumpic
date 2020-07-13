@@ -1,21 +1,20 @@
 package ua.com.cyberneophyte.jumpic.forms;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 public class CourseInfoForm {
-    @NotNull
+    //TODO make better validation
+
     @Size(min = 6,max = 255)
     private String title;
-    @NotNull
+    @NotEmpty
+    @NotBlank
     private String tags;
-    @NotNull
     @Min(1)
     @Max(255)
     private int estimatedTimeToFinish;
-    @NotNull
+    @NotEmpty
+    @NotBlank
     private String description;
 
     public String getDescription() {

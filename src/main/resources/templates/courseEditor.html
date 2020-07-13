@@ -10,7 +10,7 @@
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
     <div class="module-container d-flex" th:each="existingmodule : ${course.listOfModules}">
-        <div class="p-2 mr-auto"  th:text="${existingmodule.consecutiveNumber}"></div>
+        <div class="p-2 mr-auto" th:text="${existingmodule.consecutiveNumber}"></div>
         <div class="p-2 mr-auto flex-grow-1" th:id="${existingmodule.id}" th:text="${existingmodule.moduleName}"></div>
         <div class="p-2">
             <form th:action="@{'/courseEditor/'+${course.id}+'/deleteModule/'+${existingmodule.id}}"
@@ -26,6 +26,10 @@
             ><img src="/fonts/bootstrap-icons/pencil.svg" alt="" title="Edit"/></span>
             </button>
         </div>
+        <button type="button"  class="btn btn-primary add-chapter-btn"
+                th:value="${existingmodule.id}"
+        >Add chapter
+        </button>
     </div>
     <div>
         <button type="button" id="add-module-modal-form" class="btn btn-primary"
@@ -35,6 +39,7 @@
 </div>
 
 <div th:replace="fragments/modalFormForModuleEdit"></div>
+<div th:replace="fragments/modalFormForChapterEdit"></div>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

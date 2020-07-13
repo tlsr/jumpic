@@ -21,7 +21,7 @@
 <div th:replace="fragments/header :: header"></div>
 <div th:text="${courseInfo.title}"></div>
 <div th:text="${courseInfo.author.username}"></div>
-<div th:text="${courseInfo.description}"></div>
+<pre><div th:text="${courseInfo.description}"></div></pre>
 <div th:text="${courseInfo.estimatedTimeToFinish}"></div>
 <div>
 <span th:each="tag : ${courseInfo.tags}">

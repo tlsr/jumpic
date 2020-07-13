@@ -1,20 +1,30 @@
 package ua.com.cyberneophyte.jumpic.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "modules")
-public class Module {
+public class Module implements Structured{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String moduleName;
-   // private List<Chapter> listOfChapters;
+    @OneToMany(mappedBy = "module", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    private List<Chapter> listOfChapters;
     private Integer points;
     private Integer consecutiveNumber;
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
+
+    public List<Chapter> getListOfChapters() {
+        return listOfChapters;
+    }
+
+    public void setListOfChapters(List<Chapter> listOfChapters) {
+        this.listOfChapters = listOfChapters;
+    }
 
     public Course getCourse() {
         return course;

@@ -48,3 +48,7 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.chapter-container{
+    padding-left: 50px;
+}

@@ -4,13 +4,24 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "chapters")
-public class Chapter {
+public class Chapter implements Structured{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String chapterName;
    // private java.util.List<Lesson> content;
-    private Integer order;
+    private Integer consecutiveNumber;
+    @ManyToOne
+    @JoinColumn(name = "module_id")
+    private Module module;
+
+    public Module getModule() {
+        return module;
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
+    }
 
     public Long getId() {
         return id;
@@ -28,11 +39,11 @@ public class Chapter {
         this.chapterName = chapterName;
     }
 
-    public Integer getOrder() {
-        return order;
+    public Integer getConsecutiveNumber() {
+        return consecutiveNumber;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setConsecutiveNumber(Integer order) {
+        this.consecutiveNumber = order;
     }
 }

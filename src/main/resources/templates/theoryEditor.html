@@ -11,9 +11,10 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 <div class="content">
-    <form th:object="${quizForm}" th:action="@{addQuizLesson}" th:method="post">
+    <form th:object="${theoryForm}" th:action="@{${acctionLink}}" th:method="post">
         <div class="col-md ">
             <label>Short title</label>
+            <input type="hidden" th:field="*{id}"/>
             <input type="text" th:field="*{title}" class="form-control"
                    th:classappend="${not #lists.isEmpty(#fields.errors('title'))} ? (is-invalid) : (is-valid)"
                    required =""/>
@@ -22,16 +23,16 @@
             </div>
         </div>
         <div class="col-md ">
-            <label>Question</label>
-            <textarea th:field="*{question}" class="form-control"
-                      th:classappend="${not #lists.isEmpty(#fields.errors('question'))} ? (is-invalid) : (is-valid)"
+            <label>Content</label>
+            <textarea th:field="*{content}" class="form-control"
+                   th:classappend="${not #lists.isEmpty(#fields.errors('content'))} ? (is-invalid) : (is-valid)"
                       required ="" th:rows="12"></textarea>
             <div class="invalid-feedback">
-                <p th:each="error: ${#fields.errors('question')}" th:text="${error}">Invalid data</p>
+                <p th:each="error: ${#fields.errors('content')}" th:text="${error}">Invalid data</p>
             </div>
         </div>
-        <div>
-            <button type="submit">Save</button>
+        <div  class="col-md ">
+            <button type="submit" class="btn btn-primary add-chapter-btn">Save</button>
         </div>
     </form>
 </div>

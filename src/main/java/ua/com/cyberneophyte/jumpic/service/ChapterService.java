@@ -27,14 +27,14 @@ public class ChapterService {
 
     public void addChapterToModule(Chapter chapter, Module module){
         List<Chapter> listOfChapters = moduleRepo.findModuleById(module.getId()).getListOfChapters();
-        StructuredService.incrementConsecutiveNumber(chapter,listOfChapters);
+        StructuredUtil.incrementConsecutiveNumber(chapter,listOfChapters);
         listOfChapters.add(chapter);
         saveChapter(chapter);
     }
 
     public void deleteChapterFromModule(Chapter chapter,Module module) {
         List<Chapter> listOfChapters = module.getListOfChapters();
-        StructuredService.decrementConsecutiveNumber(chapter,listOfChapters);
+        StructuredUtil.decrementConsecutiveNumber(chapter,listOfChapters);
         listOfChapters.remove(chapter);
         deleteChapter(chapter);
     }

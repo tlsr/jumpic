@@ -1,6 +1,10 @@
 package ua.com.cyberneophyte.jumpic.domain;
 
 import javax.persistence.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Entity
 @Table(name = "chapters")
@@ -9,11 +13,27 @@ public class Chapter implements Structured{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String chapterName;
-   // private java.util.List<Lesson> content;
+    @OneToMany(mappedBy = "chapter", orphanRemoval = true, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Lesson> listOfLessons;
     private Integer consecutiveNumber;
     @ManyToOne
     @JoinColumn(name = "module_id")
     private Module module;
+
+    public List<Lesson> getOrderedListOfLessons(){
+        List<Lesson> sortedList = listOfLessons.stream()
+                .sorted(Comparator.comparingInt(Lesson::getConsecutiveNumber))
+                .collect(Collectors.toList());
+        return sortedList;
+    }
+
+    public List<Lesson> getListOfLessons() {
+        return listOfLessons;
+    }
+
+    public void setListOfLessons(List<Lesson> lessons) {
+        this.listOfLessons = lessons;
+    }
 
     public Module getModule() {
         return module;

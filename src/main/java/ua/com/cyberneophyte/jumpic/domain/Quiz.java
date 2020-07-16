@@ -1,21 +1,17 @@
 package ua.com.cyberneophyte.jumpic.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
+import java.util.Map;
 
-//@Entity
-public class Quiz implements Lesson {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+@Entity
+@Table(name = "quiz")
+@PrimaryKeyJoinColumn(name = "lesson_id")
+public class Quiz extends Lesson {
+    @Lob
     private String question;
-    private Integer points;
-    private Integer order;
-    private List<Answer> listOfAnswers;
-    private String title;
+    @OneToMany(mappedBy = "quiz", fetch = FetchType.EAGER)
+    private List<Answer> answers;
 
     public String getQuestion() {
         return question;
@@ -23,5 +19,21 @@ public class Quiz implements Lesson {
 
     public void setQuestion(String question) {
         this.question = question;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
+
+    @Override
+    public String toString() {
+        return "Quiz{" +
+                "question='" + question + '\'' +
+                ", answers=" + answers +
+                '}';
     }
 }

@@ -57,13 +57,6 @@ public class Module implements Structured{
         this.moduleName = moduleName;
     }
 
-/*    public List<Chapter> getListOfChapters() {
-        return listOfChapters;
-    }
-
-    public void setListOfChapters(List<Chapter> listOfChapters) {
-        this.listOfChapters = listOfChapters;
-    }*/
 
     public Integer getPoints() {
         return points;

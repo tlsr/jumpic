@@ -6,4 +6,5 @@ import ua.com.cyberneophyte.jumpic.domain.CourseInfo;
 
 public interface ChapterRepo extends JpaRepository<Chapter,Long> {
     void deleteChapterById(Long id);
+    Chapter findChapterById(Long id);
 }

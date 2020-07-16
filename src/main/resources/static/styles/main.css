@@ -52,3 +52,13 @@
 .chapter-container{
     padding-left: 50px;
 }
+
+.lesson-container{
+    padding-left: 100px;
+}
+
+.greetings{
+    margin: auto;
+    width: 30%;
+    padding: 10px;
+}

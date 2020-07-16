@@ -9,14 +9,20 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 <div class="container border ">
-    <div  th:each="existingmodule : ${course.listOfModules}">
+    <div th:each="existingmodule : ${course.listOfModules}">
         <div class="module-container d-flex border">
             <div class="p-2 mr-auto" th:text="${existingmodule.consecutiveNumber}"></div>
             <div class="p-2 mr-auto flex-grow-1" th:id="'module-id-'+${existingmodule.id}"
                  th:text="${existingmodule.moduleName}"></div>
             <div class="p-2">
-                <form th:action="@{'/courseEditor/'+${course.id}+'/deleteModule/'+${existingmodule.id}}"
+                <!--<form th:action="@{'/courseEditor/'+${course.id}+'/deleteModule/'+${existingmodule.id}}"
                       method="post">
+                    <button type="submit" class="btn btn-primary">
+                        <img src="/fonts/bootstrap-icons/trash.svg" alt="" title="Delete"/>
+                    </button>
+                </form>-->
+                <form th:action="@{'/courseEditor/'+${course.id}+'/deleteModule/'+${existingmodule.id}}"
+                      th:method="post">
                     <button type="submit" class="btn btn-primary">
                         <img src="/fonts/bootstrap-icons/trash.svg" alt="" title="Delete"/>
                     </button>
@@ -32,7 +38,8 @@
         <div th:each="chapter : ${existingmodule.listOfChapters}">
             <div class="chapter-container d-flex border">
                 <div class="p-2 mr-auto" th:text="${chapter.consecutiveNumber}"></div>
-                <div class="p-2 mr-auto flex-grow-1" th:id="'chpter-id-'+${chapter.id}" th:text="${chapter.chapterName}"></div>
+                <div class="p-2 mr-auto flex-grow-1" th:id="'chpter-id-'+${chapter.id}"
+                     th:text="${chapter.chapterName}"></div>
                 <div class="p-2">
                     <form th:action="@{'/courseEditor/'+${course.id}+'/'+${existingmodule.id}+'/deleteChapter/'+${chapter.id}}"
                           method="post">
@@ -42,17 +49,58 @@
                     </form>
                 </div>
                 <div class="p-2">
-                    <button type="button" id="edit-module-modal-form" class="btn btn-primary edit-chapter-button bg-info"
+                    <button type="button" id="edit-module-modal-form"
+                            class="btn btn-primary edit-chapter-button bg-info"
                             th:data-module-id="${existingmodule.id}"
                             th:data-chapter-id="${chapter.id}"
                     ><img src="/fonts/bootstrap-icons/pencil.svg" alt="" title="Edit"/></span>
                     </button>
                 </div>
-            </div>
-            <a th:href="@{}" class="btn btn-primary add-chapter-btn  "
 
-            >Add lesson
-            </a>
+            </div>
+
+            <div th:each="lesson : ${chapter.orderedListOfLessons}">
+                <div class="lesson-container d-flex border">
+                    <div class="p-2 mr-auto" th:text="${lesson.consecutiveNumber}"></div>
+                    <div class="p-2 mr-auto flex-grow-1" th:text="${lesson.title}"></div>
+                    <div class="p-2">
+                        <form th:action="@{'/courseEditor/'+${course.id}+'/'+${existingmodule.id}+'/'+${chapter.id}+'/deleteLesson/'+${lesson.id}}"
+                              method="post">
+                            <button type="submit" class="btn btn-primary bg-info">
+                                <img src="/fonts/bootstrap-icons/trash.svg" alt="" title="Delete"/>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="p-2">
+                        <!--<button type="button" id="edit-module-modal-form"
+                                class="btn btn-primary edit-chapter-button bg-info"
+                                th:data-module-id="${existingmodule.id}"
+                                th:data-chapter-id="${chapter.id}"
+                        >
+                        </button>
+                        -->
+                        <a th:href="@{'/courseEditor/'+${course.id}+'/'+${existingmodule.id}+'/'+${chapter.id}+'/editLesson/'+${lesson.id}}"
+                           class="btn btn-primary ">
+                            <img src="/fonts/bootstrap-icons/pencil.svg" alt="" title="Edit"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="lesson-container">
+            <span>
+                <a th:href="@{'/courseEditor/'+${course.id}+'/'+${existingmodule.id}+'/'+${chapter.id}+'/theoryEditor'}"
+                   name="addTheory"
+                   class="btn btn-primary"
+                >Add lesson
+                </a>
+            </span>
+                <span>
+                <a th:href="@{'/courseEditor/'+${course.id}+'/'+${existingmodule.id}+'/'+${chapter.id}+'/quizEditor'}"
+                   class="btn btn-primary add-chapter-btn  "
+                >Add quiz
+                </a>
+            </span>
+            </div>
         </div>
         <div class="pl-5 m-2">
             <button type="button" class="btn btn-primary add-chapter-btn  "

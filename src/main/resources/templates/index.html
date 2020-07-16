@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/main.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"/>
 
     <!-- JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -19,11 +19,14 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-<div class="nav-text" sec:authorize="!isAuthenticated()">
-    <div> Welcome, anon. Please log in.</div>
-    <div class="btn_grp">
-        <a href="/login" type="button" class="btn btn-primary btn-dark btn-lg">Log in</a>
-        <a href="/registration" type="button" class="btn btn-primary btn-dark btn-lg">Sign Up</a>
+<div class="greetings" sec:authorize="!isAuthenticated()">
+
+    <div class="card  text-center">
+        <div class="card-body ">
+            <div> Welcome, anon. Please log in.</div>
+            <a href="/login" type="button" class="btn btn-primary btn-dark  ">Log in</a>
+            <a href="/registration" type="button" class="btn btn-primary btn-dark ">Sign Up</a>
+        </div>
     </div>
 </div>
 
@@ -39,7 +42,7 @@
                 <span th:text="${tag}"></span>
             </span>
                 <div>
-                    <a th:href="@{/courseView/{id}(id=${courseInfo.id})}" class="btn btn-primary">View course</a>
+                    <a th:href="@{/courseView/{id}(id=${courseInfo.id})}" class="btn btn-primary btn-dark">View course</a>
                 </div>
             </div>
         </div>

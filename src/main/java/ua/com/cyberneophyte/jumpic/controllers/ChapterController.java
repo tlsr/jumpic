@@ -27,6 +27,7 @@ public class ChapterController {
     @PostMapping("/addChapter")
     public String addChapterToModule(Model model, Module module, Course course, Chapter chapter){
         model.addAttribute("chapter",chapter);
+        System.out.println(module.getId()+"__________________________________________    "+module.getModuleName());
         chapterService.addChapterToModule(chapter,module);
         return "redirect:/courseEditor/{course}";
     }

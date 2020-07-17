@@ -2,6 +2,7 @@ package ua.com.cyberneophyte.jumpic;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -70,6 +71,7 @@ public class CourseInfoEditorControllerTest {
 
     @Test
     @WithUserDetails("testUser")
+    @Disabled
     public void createCourseInfoWithCorrectData() throws Exception {
         this.mockMvc.perform(post("/courseInfoEditor").params(newCourseParams).with(csrf()))
                 .andDo(print())

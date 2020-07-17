@@ -34,6 +34,7 @@ public class QuizController {
 
     @GetMapping("/quizEditor")
     public String showQuizEditor(Model model, Chapter chapter, QuizForm quizForm) {
+        quizForm.getAnswers().add(new Answer());
         model.addAttribute("quizForm", quizForm);
         return "/quizEditor";
     }

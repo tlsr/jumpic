@@ -21,52 +21,54 @@
 <div th:replace="fragments/header :: header"></div>
 <div class="content jumbotron justify-content-md-center">
     <h1 class="display-4">Registration form</h1>
-<form action="/registration" th:action="@{/registration}" th:object="${registrationForm}" method="post">
-    <div class="col-md ">
-        <label>First name</label>
-        <input type="text" th:field="*{username}" class="form-control"
-               th:classappend="${not #lists.isEmpty(#fields.errors('username'))} ? (is-invalid) : (is-valid)"
-               required =""/>
-        <div class="invalid-feedback">
-            <p th:each="error: ${#fields.errors('username')}" th:text="${error}">Invalid data</p>
+    <form action="/registration" th:action="@{/registration}" th:object="${registrationForm}" method="post">
+        <div class="col-md ">
+            <label>First name</label>
+            <input type="text" th:field="*{username}" class="form-control"
+                   th:classappend="${not #lists.isEmpty(#fields.errors('username'))} ? (is-invalid) : (is-valid)"
+                   required=""/>
+            <div class="invalid-feedback">
+                <p th:each="error: ${#fields.errors('username')}" th:text="${error}">Invalid data</p>
+            </div>
         </div>
-    </div>
-    <div class="col-md ">
-        <label >Password</label>
-        <input type="password" class="form-control" th:field="*{password}"
-               th:classappend="${not #lists.isEmpty(#fields.errors('password'))} ? (is-invalid) : (is-valid)"
-               required=""/>
-        <div class="invalid-feedback">
-            <p th:each="error: ${#fields.errors('password')}" th:text="${error}">Invalid data</p>
+        <div class="col-md ">
+            <label>Password</label>
+            <input type="password" class="form-control" th:field="*{password}"
+                   th:classappend="${not #lists.isEmpty(#fields.errors('password'))} ? (is-invalid) : (is-valid)"
+                   required=""/>
+            <div class="invalid-feedback">
+                <p th:each="error: ${#fields.errors('password')}" th:text="${error}">Invalid data</p>
+            </div>
         </div>
-    </div>
-    <div class="col-md ">
-        <label >Confirm password</label>
-        <input type="password" class="form-control" th:field="*{confirmPassword}"
-               th:classappend="${not #lists.isEmpty(#fields.errors('password'))} ? (is-invalid) : (is-valid)"
-               required=""/>
-    </div>
-    <div class="col-md ">
-        <label >Email</label>
-        <input type="text" class="form-control" th:field="*{email}"
-               th:classappend="${not #lists.isEmpty(#fields.errors('email'))} ? (is-invalid) : (is-valid)"
-               required=""/>
-        <div class="invalid-feedback">
-            <p th:each="error: ${#fields.errors('email')}" th:text="${error}">Invalid data</p>
+        <div class="col-md ">
+            <label>Confirm password</label>
+            <input type="password" class="form-control" th:field="*{confirmPassword}"
+                   th:classappend="${not #lists.isEmpty(#fields.errors('password'))} ? (is-invalid) : (is-valid)"
+                   required=""/>
         </div>
-    </div>
-    <div class="col-md ">
-        <label >Age</label>
-        <input type="number" class="form-control" th:field="*{age}"
-               th:classappend="${not #lists.isEmpty(#fields.errors('age'))} ? (is-invalid) : (is-valid)"
-               required=""/>
-        <div class="invalid-feedback">
-            <p th:each="error: ${#fields.errors('age')}" th:text="${error}">Invalid data</p>
+        <div class="col-md ">
+            <label>Email</label>
+            <input type="text" class="form-control" th:field="*{email}"
+                   th:classappend="${not #lists.isEmpty(#fields.errors('email'))} ? (is-invalid) : (is-valid)"
+                   required=""/>
+            <div class="invalid-feedback">
+                <p th:each="error: ${#fields.errors('email')}" th:text="${error}">Invalid data</p>
+            </div>
         </div>
-    </div>
-    <button class="btn btn-primary btn-dark float-right" type="submit">Sign up!</button>
-</form>
+        <div class="col-md ">
+            <label>Age</label>
+            <input type="number" class="form-control" th:field="*{age}"
+                   th:classappend="${not #lists.isEmpty(#fields.errors('age'))} ? (is-invalid) : (is-valid)"
+                   required=""/>
+            <div class="invalid-feedback">
+                <p th:each="error: ${#fields.errors('age')}" th:text="${error}">Invalid data</p>
+            </div>
+        </div>
+        <div class="col-md pt-2">
+            <button class="btn btn-primary btn-dark float-right" type="submit">Sign up!</button>
+        </div>
+    </form>
 </div>
-<script src="/scripts/registration.js"></script>
+
 </body>
 </html>

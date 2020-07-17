@@ -19,6 +19,6 @@ public class MainPageController {
     @GetMapping(value = {"/index","/"})
     public String getHomePage(Model model){
         model.addAttribute("coursesInfo",courseInfoRepo.findAll());
-        return "/index.html";
+        return "index.html";
     }
 }

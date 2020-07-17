@@ -19,7 +19,7 @@ import java.util.Map;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-//@TestPropertySource("/application-test.properties")
+@TestPropertySource("/application-test.properties")
 //@Sql(value = {"/create-user-after.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 //@Sql(value = {"/create-user-after.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class CourseEditorControllerTest {
@@ -37,7 +37,7 @@ public class CourseEditorControllerTest {
 
     @Test
     public void simpleTest() throws Exception {
- /*       Course course = courseRepo.findAll().get(0);
+/* *//*       Course course = courseRepo.findAll().get(0);
         Chapter chapter = chapterRepo.findAll().get(0);
         Quiz quiz = new Quiz();
         quiz.setChapter(chapter);
@@ -50,8 +50,8 @@ public class CourseEditorControllerTest {
         answ.put("incorrect answe4r", false);
         answ.put("incorrect answer5", false);
         quiz.setAnswers(answ);
-        lessonRepo.save(quiz);*/
+        lessonRepo.save(quiz);*//*
         Theory theory = (Theory) lessonRepo.findLessonById(4L);
-        System.out.println(theory);
+        System.out.println(theory);*/
     }
 }

@@ -3,7 +3,7 @@ package ua.com.cyberneophyte.jumpic.forms;
 import javax.validation.constraints.*;
 
 public class CourseInfoForm {
-    //TODO make better validation
+    //TODO  better validation
 
     @Size(min = 6,max = 255)
     private String title;

@@ -18,21 +18,35 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
+
 <div th:replace="fragments/header :: header"></div>
-<div th:text="${courseInfo.title}"></div>
-<div th:text="${courseInfo.author.username}"></div>
-<pre><div th:text="${courseInfo.description}"></div></pre>
-<div th:text="${courseInfo.estimatedTimeToFinish}"></div>
-<div>
-<span th:each="tag : ${courseInfo.tags}">
-    <span th:text="${tag}"></span>
-</span>
-</div>
-<div th:if="${#authentication.principal.id} == ${courseInfo.author.id}">
-    <a th:href="@{/courseEditor/{id}(id=${courseInfo.course.id})}">Edit</a>
-</div>
-<div th:if="${#authentication.principal.id} != ${courseInfo.author.id}">
-    <a th:href="@{/}">Join Course</a>
+<div class="jumbotron">
+    <h1 class="display-4">
+        <div th:text="${courseInfo.title}"></div>
+    </h1>
+    <div>
+        <span> Author: </span>
+        <span th:text="${courseInfo.author.username}"></span>
+    </div>
+    <div>Description:</div>
+    <pre><div th:text="${courseInfo.description}"></div></pre>
+    <div>
+        <span>Estimated time to finish: </span>
+        <span th:text="${courseInfo.estimatedTimeToFinish}"></span>
+    </div>
+    <div>
+        <span>Tags: </span>
+        <span th:each="tag : ${courseInfo.tags}">
+            <span th:text="${tag}"></span>
+        </span>
+    </div>
+
+    <div th:if="${#authentication.principal.id} == ${courseInfo.author.id}">
+        <a class="btn btn-primary btn-dark" th:href="@{/courseEditor/{id}(id=${courseInfo.course.id})}">Edit</a>
+    </div>
+    <div class="btn btn-primary btn-dark" th:if="${#authentication.principal.id} != ${courseInfo.author.id}">
+        <a th:href="@{/}">Join Course</a>
+    </div>
 </div>
 </body>
 </html>

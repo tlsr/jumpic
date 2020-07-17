@@ -15,12 +15,6 @@
             <div class="p-2 mr-auto flex-grow-1" th:id="'module-id-'+${existingmodule.id}"
                  th:text="${existingmodule.moduleName}"></div>
             <div class="p-2">
-                <!--<form th:action="@{'/courseEditor/'+${course.id}+'/deleteModule/'+${existingmodule.id}}"
-                      method="post">
-                    <button type="submit" class="btn btn-primary">
-                        <img src="/fonts/bootstrap-icons/trash.svg" alt="" title="Delete"/>
-                    </button>
-                </form>-->
                 <form th:action="@{'/courseEditor/'+${course.id}+'/deleteModule/'+${existingmodule.id}}"
                       th:method="post">
                     <button type="submit" class="btn btn-primary">
@@ -66,21 +60,14 @@
                     <div class="p-2">
                         <form th:action="@{'/courseEditor/'+${course.id}+'/'+${existingmodule.id}+'/'+${chapter.id}+'/deleteLesson/'+${lesson.id}}"
                               method="post">
-                            <button type="submit" class="btn btn-primary bg-info">
+                            <button type="submit" class="btn btn-primary  bg-success">
                                 <img src="/fonts/bootstrap-icons/trash.svg" alt="" title="Delete"/>
                             </button>
                         </form>
                     </div>
                     <div class="p-2">
-                        <!--<button type="button" id="edit-module-modal-form"
-                                class="btn btn-primary edit-chapter-button bg-info"
-                                th:data-module-id="${existingmodule.id}"
-                                th:data-chapter-id="${chapter.id}"
-                        >
-                        </button>
-                        -->
                         <a th:href="@{'/courseEditor/'+${course.id}+'/'+${existingmodule.id}+'/'+${chapter.id}+'/editLesson/'+${lesson.id}}"
-                           class="btn btn-primary ">
+                           class="btn btn-primary bg-success">
                             <img src="/fonts/bootstrap-icons/pencil.svg" alt="" title="Edit"/>
                         </a>
                     </div>
@@ -90,20 +77,20 @@
             <span>
                 <a th:href="@{'/courseEditor/'+${course.id}+'/'+${existingmodule.id}+'/'+${chapter.id}+'/theoryEditor'}"
                    name="addTheory"
-                   class="btn btn-primary"
+                   class="btn btn-primary bg-success"
                 >Add lesson
                 </a>
             </span>
                 <span>
                 <a th:href="@{'/courseEditor/'+${course.id}+'/'+${existingmodule.id}+'/'+${chapter.id}+'/quizEditor'}"
-                   class="btn btn-primary add-chapter-btn  "
+                   class="btn btn-primary add-chapter-btn bg-success "
                 >Add quiz
                 </a>
             </span>
             </div>
         </div>
         <div class="pl-5 m-2">
-            <button type="button" class="btn btn-primary add-chapter-btn  "
+            <button type="button" class="btn btn-primary add-chapter-btn  bg-info"
                     th:value="${existingmodule.id}"
             >Add chapter
             </button>

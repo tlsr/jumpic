@@ -32,28 +32,31 @@
                 <p th:each="error: ${#fields.errors('question')}" th:text="${error}">Invalid data</p>
             </div>
         </div>
-        <!-- th:classappend="${not #lists.isEmpty(#fields.errors('title'))} ? (is-invalid) : (is-valid)"
-                       required =""
-
-                       <div class="invalid-feedback">
-                    <p th:each="error: ${#fields.errors('title')}" th:text="${error}">Invalid data</p>
-                </div>
-
-                       -->
-        <div lass="col-md ">
-            <div th:each="answer,answStat : *{answers}">
+        <div class="col-md mt-2" th:each="answer,answStat : *{answers}">
+            <div class=" d-flex">
                 <input type="hidden" th:field="*{answers[__${answStat.index}__].id}">
-                <input type="text" th:field="*{answers[__${answStat.index}__].answerText}" class="form-control"
-                />
-                <input type="checkbox" th:field="${quizForm.answers[__${answStat.index}__].isCorrect}"
-                       class="form-control"
-                />
-                <button type="submit" name="removeRow" th:value="*{answers[__${answStat.index}__].id}" >Remove answer</button>
+                <div class="flex-grow-1 mr-auto">
+                    <input type="text"
+                           th:field="*{answers[__${answStat.index}__].answerText}"
+                           class=" form-control" required=""
+                    />
+                </div>
+                <div class="ml-2 mr-2">
+                    <input type="checkbox"
+                           th:field="${quizForm.answers[__${answStat.index}__].isCorrect}"
+                           class=""
+                    /></div>
+                <div class="">
+                    <button class=" form-control  btn-primary" type="submit" name="removeRow"
+                            th:value="*{answers[__${answStat.index}__].id}"><img
+                            src="/fonts/bootstrap-icons/trash.svg" alt="" title="Delete"/>
+                    </button>
+                </div>
             </div>
         </div>
-        <!--th:text="#{seedstarter.row.add}"-->
+        <!--        </div>-->
         <div class="col-md pt-2">
-            <button type="submit" class="btn btn-primary" name="addRow">Add row</button>
+            <button type="submit" class="btn btn-primary" name="addRow">Add answer</button>
         </div>
         <div class="col-md pt-2">
             <button type="submit" class="btn btn-primary" name="saveQuiz">Save</button>
@@ -70,6 +73,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
-<script type="text/javascript" th:src="@{'/scripts/courseEditor.js'}"></script>
 </body>
 </html>

@@ -11,6 +11,7 @@ import ua.com.cyberneophyte.jumpic.repos.LessonRepo;
 import ua.com.cyberneophyte.jumpic.service.AnswerService;
 import ua.com.cyberneophyte.jumpic.service.LessonService;
 import ua.com.cyberneophyte.jumpic.service.QuizService;
+import ua.com.cyberneophyte.jumpic.validators.QuizFormValidator;
 
 import javax.validation.Valid;
 
@@ -22,28 +23,30 @@ public class QuizController {
     private final LessonService lessonService;
     private final AnswerRepo answerRepo;
     private final AnswerService answerService;
+    private final QuizFormValidator quizFormValidator;
 
 
-    public QuizController(LessonRepo lessonRepo, QuizService quizService, LessonService lessonService, AnswerRepo answerRepo, AnswerService answerService) {
+    public QuizController(LessonRepo lessonRepo, QuizService quizService, LessonService lessonService, AnswerRepo answerRepo, AnswerService answerService, QuizFormValidator quizFormValidator) {
         this.lessonRepo = lessonRepo;
         this.quizService = quizService;
         this.lessonService = lessonService;
         this.answerRepo = answerRepo;
         this.answerService = answerService;
+        this.quizFormValidator = quizFormValidator;
     }
 
     @GetMapping("/quizEditor")
     public String showQuizEditor(Model model, Chapter chapter, QuizForm quizForm) {
         quizForm.getAnswers().add(new Answer());
         model.addAttribute("quizForm", quizForm);
-        return "/quizEditor";
+        return "quizEditor";
     }
 
     @RequestMapping(value ={ "/quizEditor","/edditQuiz/editQuizLesson"} , params = {"addRow"})
     public String addRow(Model model, QuizForm quizForm, BindingResult bindingResult) {
         quizForm.getAnswers().add(new Answer());
         model.addAttribute("quizForm", quizForm);
-        return "/quizEditor";
+        return "quizEditor";
     }
 
     @RequestMapping(value ={ "/quizEditor","/edditQuiz/editQuizLesson"} , params = {"removeRow"})
@@ -56,15 +59,19 @@ public class QuizController {
 //        answerRepo.deleteAnswersById(answerId);
 /*        quizForm.getAnswers().add(new Answer());*/
 
-        return "/quizEditor";
+        return "quizEditor";
     }
 
     @RequestMapping(value = "/quizEditor", params = {"saveQuiz"})
-    public String saveQuiz(Model model, QuizForm quizForm,
+    public String saveQuiz(Model model,@Valid QuizForm quizForm,
+                           BindingResult bindingResult,
                            @PathVariable Chapter chapter) {
+        quizFormValidator.validate(quizForm,bindingResult);
+        if(bindingResult.hasErrors()){
+            return "quizEditor";
+        }
         Quiz quiz = quizService.createQuizeFromQuizForm(quizForm);
         quizService.addQuizToChapter(quiz,chapter);
-       // lessonService.addLessonToChapter(quiz,chapter);
         return "redirect:/courseEditor/{course}";
     }
 
@@ -76,8 +83,9 @@ public class QuizController {
         quizForm.setAnswers(quiz.getAnswers());
         quizForm.setQuestion(quiz.getQuestion());
         quizForm.setTitle(quiz.getTitle());
+        quizForm.setPoints(quiz.getPoints());
         model.addAttribute("acctionLink","editQuizLesson");
-        return "/quizEditor";
+        return "quizEditor";
     }
 
     @PostMapping("/edditQuiz/editQuizLesson")
@@ -88,12 +96,11 @@ public class QuizController {
                                             BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {
-            return "/quizEditor";
+            return "quizEditor";
         }
+
         quiz = quizService.createQuizeFromQuizForm(quizForm);
         quizService.editQuizLessonInChapter(quiz,chapter);
-        /*theory = theoryService.createTheoryFromTheoryForm(theoryForm);
-        theoryService.editTheoryLessonInChapter(theory, chapter);*/
         return "redirect:/courseEditor/{course}";
     }
 

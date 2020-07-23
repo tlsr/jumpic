@@ -37,7 +37,7 @@
             <div class="card-body">
                 <h5 class="card-title" th:text="${courseInfo.title}"></h5>
                 <div th:text="${courseInfo.author.username}"></div>
-                <pre><div th:text="${courseInfo.description}"></div></pre>
+                <pre class="pre-scrollable" th:text="${courseInfo.description}"></pre>
                 <span class="tag" th:each="tag: ${courseInfo.tags}">
                 <span th:text="${tag}"></span>
             </span>

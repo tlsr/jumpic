@@ -21,9 +21,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @TestPropertySource("/application-test.properties")
 public class IndexPageControllerTest {
-
-    @Autowired
-    private MainPageController mainPageController;
     @Autowired
     private MockMvc mockMvc;
 

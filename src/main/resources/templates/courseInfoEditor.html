@@ -17,28 +17,28 @@
         <label>Title</label>
         <input type="text" th:field="*{title}" class="form-control"
                th:classappend="${not #lists.isEmpty(#fields.errors('title'))} ? (is-invalid) : (is-valid)"
-               required="true"/>
+               />
         <div class="invalid-feedback">
             <p th:each="error: ${#fields.errors('title')}" th:text="${error}">Invalid data</p>
         </div>
         <label>Tags(add comma separated tags )</label>
         <input type="text" th:field="*{tags}" class="form-control"
                th:classappend="${not #lists.isEmpty(#fields.errors('tags'))} ? (is-invalid) : (is-valid)"
-               required="true"/>
+               />
         <div class="invalid-feedback">
             <p th:each="error: ${#fields.errors('tags')}" th:text="${error}">Invalid data</p>
         </div>
             <label>Description</label>
             <textarea  th:field="*{description}" class="form-control"
                    th:classappend="${not #lists.isEmpty(#fields.errors('description'))} ? (is-invalid) : (is-valid)"
-                       required="true"></textarea>
+                       ></textarea>
             <div class="invalid-feedback">
                 <p th:each="error: ${#fields.errors('description')}" th:text="${error}">Invalid data</p>
             </div>
         <label>Expeted time to finish course</label>
         <input type="text" th:field="*{estimatedTimeToFinish}" class="form-control"
                th:classappend="${not #lists.isEmpty(#fields.errors('estimatedTimeToFinish'))} ? (is-invalid) : (is-valid)"
-               required="true"/>
+               />
         <div class="invalid-feedback">
             <p th:each="error: ${#fields.errors('estimatedTimeToFinish')}" th:text="${error}">Invalid data</p>
         </div>

@@ -32,15 +32,29 @@
                 <p th:each="error: ${#fields.errors('question')}" th:text="${error}">Invalid data</p>
             </div>
         </div>
+        <div class="col-md ">
+            <label>Points</label>
+            <input th:field="*{points}" class="form-control"
+                      th:classappend="${not #lists.isEmpty(#fields.errors('points'))} ? (is-invalid) : (is-valid)"
+                      required="" />
+            <div class="invalid-feedback">
+                <p th:each="error: ${#fields.errors('points')}" th:text="${error}">Invalid data</p>
+            </div>
+        </div>
         <div class="col-md mt-2" th:each="answer,answStat : *{answers}">
             <div class=" d-flex">
                 <input type="hidden" th:field="*{answers[__${answStat.index}__].id}">
                 <div class="flex-grow-1 mr-auto">
                     <input type="text"
                            th:field="*{answers[__${answStat.index}__].answerText}"
+                           th:classappend="${not #lists.isEmpty(#fields.errors('answers'))} ? (is-invalid) : (is-valid)"
                            class=" form-control" required=""
                     />
+                    <div class="invalid-feedback">
+                        <p th:each="error: ${#fields.errors('answers')}" th:text="${error}">Invalid data</p>
+                    </div>
                 </div>
+
                 <div class="ml-2 mr-2">
                     <input type="checkbox"
                            th:field="${quizForm.answers[__${answStat.index}__].isCorrect}"

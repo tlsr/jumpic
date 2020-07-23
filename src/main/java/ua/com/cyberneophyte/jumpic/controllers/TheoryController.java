@@ -32,7 +32,7 @@ public class TheoryController {
     public String showTheoryEditorForAdding(Model model, Chapter chapter, TheoryForm theoryForm) {
         model.addAttribute("theoryForm", theoryForm);
         model.addAttribute("acctionLink","addTheoryLesson");
-        return "/theoryEditor";
+        return "theoryEditor";
     }
 
   /*  @RequestMapping(value = "/theoryEditor")
@@ -50,7 +50,7 @@ public class TheoryController {
                                            BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {
-            return "/theoryEditor";
+            return "theoryEditor";
         }
         theory = theoryService.createTheoryFromTheoryForm(theoryForm);
         lessonService.addLessonToChapter(theory, chapter);
@@ -66,7 +66,7 @@ public class TheoryController {
                                             BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {
-            return "/theoryEditor";
+            return "theoryEditor";
         }
         theory = theoryService.createTheoryFromTheoryForm(theoryForm);
         theoryService.editTheoryLessonInChapter(theory, chapter);
@@ -79,6 +79,6 @@ public class TheoryController {
         theoryForm.setTitle(theory.getTitle());
         theoryForm.setId(theory.getId());
         model.addAttribute("acctionLink","editTheoryLesson");
-        return "/theoryEditor";
+        return "theoryEditor";
     }
 }

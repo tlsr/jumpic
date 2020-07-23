@@ -36,6 +36,7 @@ public class QuizService {
         quiz.setTitle(quizForm.getTitle());
         quiz.setQuestion(quizForm.getQuestion());
         quiz.setAnswers(quizForm.getAnswers());
+        quiz.setPoints(quizForm.getPoints());
         return quiz;
     }
 

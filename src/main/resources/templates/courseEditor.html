@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/main.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-<div class="container border ">
+<div class="container border">
     <div th:each="existingmodule : ${course.listOfModules}">
         <div class="module-container d-flex border">
             <div class="p-2 mr-auto" th:text="${existingmodule.consecutiveNumber}"></div>
-            <div class="p-2 mr-auto flex-grow-1" th:id="'module-id-'+${existingmodule.id}"
+            <div class="p-2 mr-auto flex-grow-1"
                  th:text="${existingmodule.moduleName}"></div>
             <div class="p-2">
                 <form th:action="@{'/courseEditor/'+${course.id}+'/deleteModule/'+${existingmodule.id}}"
@@ -25,14 +25,14 @@
             <div class=" p-2">
                 <button type="button" id="edit-module-modal-form" class="btn btn-primary edit-module-button"
                         th:value="${existingmodule.id}"
-                ><img src="/fonts/bootstrap-icons/pencil.svg" alt="" title="Edit"/></span>
+                ><img src="/fonts/bootstrap-icons/pencil.svg" alt="" title="Edit"/>
                 </button>
             </div>
         </div>
         <div th:each="chapter : ${existingmodule.listOfChapters}">
             <div class="chapter-container d-flex border">
                 <div class="p-2 mr-auto" th:text="${chapter.consecutiveNumber}"></div>
-                <div class="p-2 mr-auto flex-grow-1" th:id="'chpter-id-'+${chapter.id}"
+                <div class="p-2 mr-auto flex-grow-1"
                      th:text="${chapter.chapterName}"></div>
                 <div class="p-2">
                     <form th:action="@{'/courseEditor/'+${course.id}+'/'+${existingmodule.id}+'/deleteChapter/'+${chapter.id}}"
@@ -47,7 +47,7 @@
                             class="btn btn-primary edit-chapter-button bg-info"
                             th:data-module-id="${existingmodule.id}"
                             th:data-chapter-id="${chapter.id}"
-                    ><img src="/fonts/bootstrap-icons/pencil.svg" alt="" title="Edit"/></span>
+                    ><img src="/fonts/bootstrap-icons/pencil.svg" alt="" title="Edit"/>
                     </button>
                 </div>
 
@@ -56,6 +56,8 @@
             <div th:each="lesson : ${chapter.orderedListOfLessons}">
                 <div class="lesson-container d-flex border">
                     <div class="p-2 mr-auto" th:text="${lesson.consecutiveNumber}"></div>
+                    <!--TODO icons for theory/quizzes-->
+                    <div hidden="hidden" class="p-2 mr-auto" th:text="${lesson.consecutiveNumber}"></div>
                     <div class="p-2 mr-auto flex-grow-1" th:text="${lesson.title}"></div>
                     <div class="p-2">
                         <form th:action="@{'/courseEditor/'+${course.id}+'/'+${existingmodule.id}+'/'+${chapter.id}+'/deleteLesson/'+${lesson.id}}"

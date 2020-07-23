@@ -8,23 +8,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.com.cyberneophyte.jumpic.domain.Course;
 import ua.com.cyberneophyte.jumpic.domain.CourseInfo;
-import ua.com.cyberneophyte.jumpic.domain.Module;
 import ua.com.cyberneophyte.jumpic.domain.User;
 import ua.com.cyberneophyte.jumpic.forms.CourseInfoForm;
 import ua.com.cyberneophyte.jumpic.service.CourseService;
+import ua.com.cyberneophyte.jumpic.validators.CourseInfoValidator;
 
 import javax.validation.Valid;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import java.util.List;
 
 @Controller
 public class CourseInfoEditorController {
     private final CourseService courseService;
+    private final CourseInfoValidator courseInfoValidator;
 
-    public CourseInfoEditorController(CourseService courseService) {
+    public CourseInfoEditorController(CourseService courseService, CourseInfoValidator courseInfoValidator) {
         this.courseService = courseService;
+        this.courseInfoValidator = courseInfoValidator;
     }
 
 
@@ -37,6 +35,7 @@ public class CourseInfoEditorController {
     public String submitForm(Model model, @Valid CourseInfoForm courseInfoForm,
                              BindingResult bindingResult, Authentication authentication){
         User user =(User) authentication.getPrincipal();
+        courseInfoValidator.validate(courseInfoForm,bindingResult);
         if (bindingResult.hasErrors()) {
             return "courseInfoEditor";
         } else {
@@ -51,7 +50,7 @@ public class CourseInfoEditorController {
     @GetMapping("/courseView/{courseInfo}")
     public String displayCourse(Model model, CourseInfo courseInfo){
         model.addAttribute("courseInfo",courseInfo);
-        return "/courseView";
+        return "courseView";
     }
 
 }

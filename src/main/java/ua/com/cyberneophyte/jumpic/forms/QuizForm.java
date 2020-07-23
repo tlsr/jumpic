@@ -2,14 +2,32 @@ package ua.com.cyberneophyte.jumpic.forms;
 
 import ua.com.cyberneophyte.jumpic.domain.Answer;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
 public class QuizForm {
     private Long id;
+    @NotBlank
+    @Size(min = 3,max = 64)
     private String title;
+    @NotBlank
     private String question;
+    @Min(1)
+    @Max(5)
+    private Integer points;
     private List<Answer> answers = new ArrayList<Answer>();
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
 
     public Long getId() {
         return id;

@@ -3,18 +3,14 @@ package ua.com.cyberneophyte.jumpic.forms;
 import javax.validation.constraints.*;
 
 public class CourseInfoForm {
-    //TODO  better validation
-
-    @Size(min = 6,max = 255)
+    @Size(min = 3, max = 64, message = "{courseInfo.title.outside.range}")
     private String title;
-    @NotEmpty
-    @NotBlank
+    @NotBlank(message = "{courseInfo.tags.empty}")
     private String tags;
-    @Min(1)
-    @Max(255)
+    @Min(value = 1, message = "{courseInfo.estimatedTime.to.small}")
+    @Max(value = 255, message = "{courseInfo.estimatedTime.to.big}")
     private int estimatedTimeToFinish;
-    @NotEmpty
-    @NotBlank
+    @Size(min = 10, max = 500, message = "{courseInfo.descrition.outside.range}")
     private String description;
 
     public String getDescription() {

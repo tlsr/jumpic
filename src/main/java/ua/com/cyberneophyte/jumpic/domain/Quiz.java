@@ -10,8 +10,17 @@ import java.util.Map;
 public class Quiz extends Lesson {
     @Lob
     private String question;
-    @OneToMany(mappedBy = "quiz", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "quiz", fetch = FetchType.EAGER,orphanRemoval = true, cascade = CascadeType.PERSIST)
     private List<Answer> answers;
+    private Integer points;
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
 
     public String getQuestion() {
         return question;

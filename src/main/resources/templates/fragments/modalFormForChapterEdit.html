@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -5,6 +6,7 @@
 
 </head>
 <body>
+-->
 
 <div class="modal fade"  th:id="modal-form-chapter-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true" th:fragment="modalFormFoChapterEdit">
@@ -14,13 +16,14 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">New module</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">x</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="chapter-name" id="modal-label-input" class="col-form-label">Chapter name</label>
-                        <input type="text" th:field="*{chapterName}" class="form-control" id="chapter-name">
+                        <input type="text" th:field="*{chapterName}" class="form-control" id="chapter-name"
+                               minlength="3" maxlength="64"/>
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                     </div>
                 </div>
@@ -32,5 +35,6 @@
         </div>
     </form>
 </div>
+<!--
 </body>
-</html>
+</html>-->

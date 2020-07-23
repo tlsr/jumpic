@@ -17,12 +17,12 @@ import ua.com.cyberneophyte.jumpic.service.ModuleService;
 
 @Controller
 @RequestMapping("/courseEditor")
-public class CourseEditorController {
+public class ModuleController {
     private final CourseService courseService;
     private final ModuleService moduleService;
     private final ModuleRepo moduleRepo;
 
-    public CourseEditorController(CourseService courseService, ModuleService moduleService, ModuleRepo moduleRepo) {
+    public ModuleController(CourseService courseService, ModuleService moduleService, ModuleRepo moduleRepo) {
         this.courseService = courseService;
         this.moduleService = moduleService;
         this.moduleRepo = moduleRepo;
@@ -34,7 +34,7 @@ public class CourseEditorController {
         model.addAttribute("course", course);
         model.addAttribute("module", module);
         model.addAttribute("chapter", chapter);
-        return "/courseEditor";
+        return "courseEditor";
     }
 
     @PostMapping("/{course}/addModule")

@@ -11,10 +11,9 @@ import java.util.List;
 
 public class QuizForm {
     private Long id;
-    @NotBlank
-    @Size(min = 3,max = 64)
+    @Size(min = 3,max = 64,message = "{lesson.title.out.of.range}")
     private String title;
-    @NotBlank
+    @Size(min = 3,max = 2500,message = "{quiz.question.out.of.range}")
     private String question;
     @Min(1)
     @Max(5)

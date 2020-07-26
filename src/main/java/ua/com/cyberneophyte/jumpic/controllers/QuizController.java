@@ -42,14 +42,14 @@ public class QuizController {
         return "quizEditor";
     }
 
-    @RequestMapping(value ={ "/quizEditor","/edditQuiz/editQuizLesson"} , params = {"addRow"})
+    @RequestMapping(value ={ "/quizEditor","/{lesson}/editQuizLesson"} , params = {"addRow"})
     public String addRow(Model model, QuizForm quizForm, BindingResult bindingResult) {
         quizForm.getAnswers().add(new Answer());
         model.addAttribute("quizForm", quizForm);
         return "quizEditor";
     }
 
-    @RequestMapping(value ={ "/quizEditor","/edditQuiz/editQuizLesson"} , params = {"removeRow"})
+    @RequestMapping(value ={ "/quizEditor","/{lesson}/editQuizLesson"} , params = {"removeRow"})
     public String removeRow(Model model, QuizForm quizForm, BindingResult bindingResult,
                             @RequestParam(name = "removeRow") Long answerId) {
 
@@ -75,8 +75,8 @@ public class QuizController {
         return "redirect:/courseEditor/{course}";
     }
 
-    @GetMapping(value = "/edditQuiz/{lesson}" )
-    public String editQuizInChapterShowForm(QuizForm quizForm, Model model,
+    @GetMapping(value = "/{lesson}/edditQuiz" )
+    public String editQuizInChapterShowForm(@Valid QuizForm quizForm,BindingResult bindingResult, Model model,
                                             @PathVariable Chapter chapter, Lesson lesson) {
         Quiz quiz = quizService.findQuizeById(lesson.getId());
         quizForm.setId(quiz.getId());
@@ -84,22 +84,21 @@ public class QuizController {
         quizForm.setQuestion(quiz.getQuestion());
         quizForm.setTitle(quiz.getTitle());
         quizForm.setPoints(quiz.getPoints());
+        model.addAttribute("quizForm",quizForm);
         model.addAttribute("acctionLink","editQuizLesson");
         return "quizEditor";
     }
 
-    @PostMapping("/edditQuiz/editQuizLesson")
-    public String editQuizLessonInChapter(Model model,
+    @PostMapping(value = "/{lesson}/editQuizLesson", params = {"saveQuiz"})
+    public String editQuizLessonInChapter( @Valid QuizForm quizForm,
+                                          BindingResult bindingResult,
                                             @PathVariable Chapter chapter,
-                                            Quiz quiz,
-                                            @Valid QuizForm quizForm,
-                                            BindingResult bindingResult
-    ) {
+                                            Model model) {
+        quizFormValidator.validate(quizForm,bindingResult);
         if (bindingResult.hasErrors()) {
             return "quizEditor";
         }
-
-        quiz = quizService.createQuizeFromQuizForm(quizForm);
+        Quiz quiz = quizService.createQuizeFromQuizForm(quizForm);
         quizService.editQuizLessonInChapter(quiz,chapter);
         return "redirect:/courseEditor/{course}";
     }

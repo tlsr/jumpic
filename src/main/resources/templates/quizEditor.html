@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/main.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta charset="UTF-8"/>
 
@@ -43,15 +43,15 @@
         </div>
         <div class="col-md mt-2" th:each="answer,answStat : *{answers}">
             <div class=" d-flex">
-                <input type="hidden" th:field="*{answers[__${answStat.index}__].id}">
+                <input type="hidden" th:field="*{answers[__${answStat.index}__].id}"/>
                 <div class="flex-grow-1 mr-auto">
                     <input type="text"
                            th:field="*{answers[__${answStat.index}__].answerText}"
-                           th:classappend="${not #lists.isEmpty(#fields.errors('answers'))} ? (is-invalid) : (is-valid)"
+                           th:classappend="${not #lists.isEmpty(#fields.errors('answers['+__${answStat.index}__+'].answerText'))} ? (is-invalid) : (is-valid)"
                            class=" form-control" required=""
                     />
                     <div class="invalid-feedback">
-                        <p th:each="error: ${#fields.errors('answers')}" th:text="${error}">Invalid data</p>
+                        <p th:each="error: ${#fields.errors('answers['+__${answStat.index}__+'].answerText')}" th:text="${error}">Invalid data</p>
                     </div>
                 </div>
 
@@ -68,6 +68,15 @@
                 </div>
             </div>
         </div>
+        <div class="col-md mt-2">
+            <div th:classappend="${not #lists.isEmpty(#fields.errors('answers'))} ? (is-invalid) : (is-valid)">
+
+            </div>
+            <div class="invalid-feedback">
+                <p th:each="error: ${#fields.errors('answers')}" th:text="${error}">Invalid data</p>
+            </div>
+        </div>
+
         <!--        </div>-->
         <div class="col-md pt-2">
             <button type="submit" class="btn btn-primary" name="addRow">Add answer</button>

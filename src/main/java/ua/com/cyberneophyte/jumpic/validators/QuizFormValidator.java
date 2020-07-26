@@ -18,15 +18,25 @@ public class QuizFormValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         QuizForm quizForm  = (QuizForm) o;
-        if(quizForm.getAnswers().isEmpty()){
-            errors.rejectValue("answer","answer.list.empty");
+        List<Answer> answers = quizForm.getAnswers();
+        if(answers.isEmpty()){
+            errors.rejectValue("answers","answer.list.empty");
         }
-        Answer correctAnswer = quizForm.getAnswers().stream()
+        Answer correctAnswer = answers.stream()
                 .filter(answer -> answer.getIsCorrect())
                 .findFirst()
                 .orElse(null);
         if(correctAnswer == null){
             errors.rejectValue("answers","no.correct.answers");
+        }
+        if(answers.size()>10){
+            errors.rejectValue("answers","quiz.too.much.answers");
+        }
+        for (int i=0;i<answers.size();i++) {
+            Answer answer = answers.get(i);
+            if(answer.getAnswerText().length()<1 || answer.getAnswerText().length()>64){
+                errors.rejectValue("answers["+i+"].answerText","quiz.answer.text.out.of.range");
+            }
         }
     }
 }

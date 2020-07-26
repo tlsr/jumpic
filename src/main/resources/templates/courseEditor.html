@@ -60,7 +60,7 @@
                     <div hidden="hidden" class="p-2 mr-auto" th:text="${lesson.consecutiveNumber}"></div>
                     <div class="p-2 mr-auto flex-grow-1" th:text="${lesson.title}"></div>
                     <div class="p-2">
-                        <form th:action="@{'/courseEditor/'+${course.id}+'/'+${existingmodule.id}+'/'+${chapter.id}+'/deleteLesson/'+${lesson.id}}"
+                        <form th:action="@{'/courseEditor/'+${course.id}+'/'+${existingmodule.id}+'/'+${chapter.id}+'/'+${lesson.id}+'/deleteLesson'}"
                               method="post">
                             <button type="submit" class="btn btn-primary  bg-success">
                                 <img src="/fonts/bootstrap-icons/trash.svg" alt="" title="Delete"/>
@@ -68,7 +68,7 @@
                         </form>
                     </div>
                     <div class="p-2">
-                        <a th:href="@{'/courseEditor/'+${course.id}+'/'+${existingmodule.id}+'/'+${chapter.id}+'/editLesson/'+${lesson.id}}"
+                        <a th:href="@{'/courseEditor/'+${course.id}+'/'+${existingmodule.id}+'/'+${chapter.id}+'/'+${lesson.id}+'/editLesson/'}"
                            class="btn btn-primary bg-success">
                             <img src="/fonts/bootstrap-icons/pencil.svg" alt="" title="Edit"/>
                         </a>

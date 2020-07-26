@@ -58,7 +58,7 @@ public class TheoryController {
     }
 
 
-    @PostMapping("/edditTheory/editTheoryLesson")
+    @PostMapping("/{lesson}/editTheoryLesson")
     public String editTheoryLessonInChapter(Model model,
                                             @PathVariable Chapter chapter,
                                             Theory theory,
@@ -72,7 +72,7 @@ public class TheoryController {
         theoryService.editTheoryLessonInChapter(theory, chapter);
         return "redirect:/courseEditor/{course}";
     }
-    @GetMapping(value = "/edditTheory/{lesson}" )
+    @GetMapping(value = "/{lesson}/edditTheory" )
     public String editTheoryInChapterShowForm(TheoryForm theoryForm, Model model, Chapter chapter, Lesson lesson) {
         Theory theory = (Theory) lessonService.findLessonById(lesson.getId());
         theoryForm.setContent(theory.getContent());

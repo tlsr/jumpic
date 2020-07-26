@@ -65,11 +65,15 @@ public class QuizService {
 
         System.out.println(oldQuiz);
 
-        oldQuiz.setAnswers(quiz.getAnswers());
+        List<Answer> oldQuizAnswers = oldQuiz.getAnswers();
+        oldQuizAnswers.clear();
+        oldQuizAnswers.addAll(quiz.getAnswers());
+
+       // oldQuiz.setAnswers(quiz.getAnswers());
         oldQuiz.setQuestion(quiz.getQuestion());
         oldQuiz.setTitle(quiz.getTitle());
         List<Answer> answers = quiz.getAnswers();
-        answerRepo.deleteAnswersByQuizId(quiz.getId());
+//        answerRepo.deleteAnswersByQuizId(quiz.getId());
         answerRepo.saveAll(answers);
         saveQuiz(oldQuiz);
        /* List<Lesson> listOfChapters = chapter.getListOfLessons();

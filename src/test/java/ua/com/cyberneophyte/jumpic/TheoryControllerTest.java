@@ -137,7 +137,7 @@ public class TheoryControllerTest {
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/create-user-after.sql", "/delete-course.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void showEditFormForTheoryTest() throws Exception {
-        this.mockMvc.perform(get("/courseEditor/1/1/1/edditTheory/1").with(csrf()))
+        this.mockMvc.perform(get("/courseEditor/1/1/1/1/edditTheory").with(csrf()))
                 .andDo(print())
                 .andExpect(status().isOk())
 
@@ -150,6 +150,14 @@ public class TheoryControllerTest {
 
     @Test
     @WithUserDetails("testUser")
+    public void showAddFormForTheoryTest() throws Exception {
+        this.mockMvc.perform(get("/courseEditor/1/1/1/theoryEditor").with(csrf()))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithUserDetails("testUser")
     @Sql(value = {"/create-user-before.sql", "/create-course.sql", "/create-module.sql", "/create-chapters.sql",
             "/create-theory-lessons.sql"},
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -158,14 +166,31 @@ public class TheoryControllerTest {
         newTheoryParams.clear();
         newTheoryParams.add("title","edited title");
         newTheoryParams.add("content","edited content");
-        this.mockMvc.perform(post("/courseEditor/1/1/1/edditTheory/editTheoryLesson").params(newTheoryParams).with(csrf()))
+        newTheoryParams.add("id","1");
+        this.mockMvc.perform(post("/courseEditor/1/1/1/1/editTheoryLesson").params(newTheoryParams).with(csrf()))
                 .andDo(print())
                 .andExpect(redirectedUrl("/courseEditor/1"));
-
-
+        this.mockMvc.perform(get("/courseEditor/1"))
+                .andExpect(xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div[3]").string("edited title"))
+                .andExpect(xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div[1]").string("1"));
         assertTrue(theoryRepo.findTheoryById(1L).getContent().equals("edited content"));
-        assertTrue(theoryRepo.findTheoryById(1L).getTitle().equals("edited title"));
+        assertEquals("edited title", theoryRepo.findTheoryById(1L).getTitle());
+    }
 
+    @Test
+    @WithUserDetails("testUser")
+    @Sql(value = {"/create-user-before.sql", "/create-course.sql", "/create-module.sql", "/create-chapters.sql",
+            "/create-theory-lessons.sql"},
+            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/create-user-after.sql", "/delete-course.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    public void deleteTheoryLessonTest() throws Exception {
+        this.mockMvc.perform(post("/courseEditor/1/1/1/1/deleteLesson").params(newTheoryParams).with(csrf()))
+                .andDo(print())
+                .andExpect(redirectedUrl("/courseEditor/1"));
+        this.mockMvc.perform(get("/courseEditor/1"))
+                .andExpect(xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div[3]").string("title 2"))
+                .andExpect(xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div[1]").string("1"));
+        assertEquals(5, theoryRepo.findAll().size());
     }
 
 }

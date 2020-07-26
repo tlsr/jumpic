@@ -35,12 +35,16 @@ public class LessonService {
 
     public void deleteLessonFromChapter(Lesson lesson, Chapter chapter) {
         List<Lesson> listOfLessons = chapter.getListOfLessons();
+        System.out.println("bu!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(lesson.getId());
         StructuredUtil.decrementConsecutiveNumber(lesson,listOfLessons);
         listOfLessons.remove(lesson);
         deleteLesson(lesson);
     }
 
     public void deleteLesson(Lesson lesson){
+        System.out.println("bu!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(lesson.getId());
         lessonRepo.deleteLessonById(lesson.getId());
     }
 

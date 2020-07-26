@@ -1,5 +1,6 @@
 package ua.com.cyberneophyte.jumpic.service;
 
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.cyberneophyte.jumpic.domain.Chapter;

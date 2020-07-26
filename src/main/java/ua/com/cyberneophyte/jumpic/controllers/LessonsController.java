@@ -3,9 +3,7 @@ package ua.com.cyberneophyte.jumpic.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ua.com.cyberneophyte.jumpic.domain.*;
 import ua.com.cyberneophyte.jumpic.forms.TheoryForm;
 import ua.com.cyberneophyte.jumpic.repos.ChapterRepo;
@@ -24,19 +22,22 @@ public class LessonsController {
         this.chapterRepo = chapterRepo;
     }
 
-    @PostMapping("/deleteLesson/{lesson}")
-    public String deleteLessonFromChapter(Model model, Chapter chapter, Lesson lesson){
-        lessonService.deleteLessonFromChapter(lesson,chapter);
+    //wy doesnt work with Chapter chapter
+    @PostMapping("/{lesson}/deleteLesson")
+    public String deleteLessonFromChapter(Model model,
+                                          @PathVariable Long chapter, Lesson lesson){
+        Chapter chapter1 = chapterRepo.findChapterById(chapter);
+        lessonService.deleteLessonFromChapter(lesson,chapter1);
         return "redirect:/courseEditor/{course}";
     }
 
-    @GetMapping("/editLesson/{lesson}")
+    @GetMapping("/{lesson}/editLesson")
     public String editLessonInChapter(Model model, Chapter chapter, Lesson lesson){
         System.out.println("we are here");
         if(lesson instanceof Theory){
-            return "redirect:/courseEditor/{course}/{module}/{chapter}/edditTheory/{lesson}";
+            return "redirect:/courseEditor/{course}/{module}/{chapter}/{lesson}/edditTheory";
         }else {
-            return "redirect:/courseEditor/{course}/{module}/{chapter}/edditQuiz/{lesson}";
+            return "redirect:/courseEditor/{course}/{module}/{chapter}/{lesson}/edditQuiz";
         }
     }
 

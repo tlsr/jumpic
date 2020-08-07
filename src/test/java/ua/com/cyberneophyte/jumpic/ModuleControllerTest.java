@@ -58,7 +58,7 @@ public class ModuleControllerTest {
         assertTrue(moduleRepo.findAll().size() == 1);
     }
 
-    @Test
+/*    @Test
     @WithUserDetails("testUser")
     @Disabled//until REST realization
     public void createModuleWithEmptyNameTest() throws Exception {
@@ -67,10 +67,10 @@ public class ModuleControllerTest {
         this.mockMvc.perform(post("/courseEditor/1/addModule").params(newModuleParams).with(csrf()))
                 .andDo(print())
                 .andExpect(status().isOk())
-               /* .andExpect(xpath("/html/body/div[1]/div[1]/div[1]/div[2]").string("module1"))
-                .andExpect(xpath("/html/body/div[1]/div[1]/div[1]/div[1]").string("1"))*/;
+               *//* .andExpect(xpath("/html/body/div[1]/div[1]/div[1]/div[2]").string("module1"))
+                .andExpect(xpath("/html/body/div[1]/div[1]/div[1]/div[1]").string("1"))*//*;
         assertTrue(moduleRepo.findAll().size() == 0);
-    }
+    }*/
 
     @Test
     @WithUserDetails("testUser")

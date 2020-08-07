@@ -1,6 +1,5 @@
 package ua.com.cyberneophyte.jumpic.service;
 
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.cyberneophyte.jumpic.domain.Chapter;
@@ -9,7 +8,6 @@ import ua.com.cyberneophyte.jumpic.domain.Theory;
 import ua.com.cyberneophyte.jumpic.forms.TheoryForm;
 import ua.com.cyberneophyte.jumpic.repos.TheoryRepo;
 
-import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -22,7 +20,7 @@ public class TheoryService {
     }
 
     public Theory createTheoryFromTheoryForm(TheoryForm theoryForm) {
-        Theory theory = new Theory(theoryForm.getId(),theoryForm.getTitle(),theoryForm.getContent());
+        Theory theory = new Theory(theoryForm.getId(), theoryForm.getTitle(), theoryForm.getContent());
         return theory;
     }
 
@@ -30,13 +28,22 @@ public class TheoryService {
         List<Lesson> listOfChapters = chapter.getListOfLessons();
         Theory oldTheory = (Theory) listOfChapters.stream()
                 .filter(lesson ->
-                    lesson.getId().equals(theory.getId())
+                        lesson.getId().equals(theory.getId())
                 )
                 .findFirst()
                 .orElse(null);
         oldTheory.setContent(theory.getContent());
         oldTheory.setTitle(theory.getTitle());
         saveTheory(oldTheory);
+    }
+
+    public TheoryForm createTheoryFormFromLessonId(Long lessonId) {
+        Theory theory = theoryRepo.findTheoryById(lessonId);
+        TheoryForm theoryForm = new TheoryForm();
+        theoryForm.setContent(theory.getContent());
+        theoryForm.setTitle(theory.getTitle());
+        theoryForm.setId(theory.getId());
+        return theoryForm;
     }
 
     public void saveTheory(Theory theory) {

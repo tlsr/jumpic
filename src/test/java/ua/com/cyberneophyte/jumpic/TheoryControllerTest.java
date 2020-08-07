@@ -137,7 +137,7 @@ public class TheoryControllerTest {
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/create-user-after.sql", "/delete-course.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void showEditFormForTheoryTest() throws Exception {
-        this.mockMvc.perform(get("/courseEditor/1/1/1/1/edditTheory").with(csrf()))
+        this.mockMvc.perform(get("/courseEditor/1/1/1/1/editTheory").with(csrf()))
                 .andDo(print())
                 .andExpect(status().isOk())
 

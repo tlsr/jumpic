@@ -1,26 +1,22 @@
 package ua.com.cyberneophyte.jumpic.service;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.stereotype.Service;
-import ua.com.cyberneophyte.jumpic.domain.*;
+import ua.com.cyberneophyte.jumpic.domain.Course;
+import ua.com.cyberneophyte.jumpic.domain.CourseInfo;
+import ua.com.cyberneophyte.jumpic.domain.User;
 import ua.com.cyberneophyte.jumpic.forms.CourseInfoForm;
 import ua.com.cyberneophyte.jumpic.repos.CourseInfoRepo;
 import ua.com.cyberneophyte.jumpic.repos.CourseRepo;
-
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 
 @Service
 public class CourseService {
     private final CourseRepo courseRepo;
     private final CourseInfoRepo courseInfoRepo;
-    private final ModuleService moduleService;
 
-    public CourseService(CourseRepo courseRepo, CourseInfoRepo courseInfoRepo, ModuleService moduleService) {
+
+    public CourseService(CourseRepo courseRepo, CourseInfoRepo courseInfoRepo) {
         this.courseRepo = courseRepo;
         this.courseInfoRepo = courseInfoRepo;
-        this.moduleService = moduleService;
     }
 
     public Course findCourseById(Long courseId) {
@@ -45,7 +41,6 @@ public class CourseService {
         course.setCourseInfo(courseInfo);
         return course;
     }
-
 
 
 }

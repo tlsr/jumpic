@@ -21,24 +21,23 @@ public class ChapterService {
         this.moduleRepo = moduleRepo;
     }
 
-    public void saveChapter(Chapter chapter){
+    public void saveChapter(Chapter chapter) {
         this.chapterRepo.save(chapter);
     }
 
-    public void addChapterToModule(Chapter chapter, Module module){
+    public void addChapterToModule(Chapter chapter, Module module) {
         List<Chapter> listOfChapters = moduleRepo.findModuleById(module.getId()).getListOfChapters();
-        StructuredUtil.incrementConsecutiveNumber(chapter,listOfChapters);
+        StructuredUtil.incrementConsecutiveNumber(chapter, listOfChapters);
         listOfChapters.add(chapter);
         saveChapter(chapter);
     }
 
-    public void deleteChapterFromModule(Chapter chapter,Module module) {
+    public void deleteChapterFromModule(Chapter chapter, Module module) {
         List<Chapter> listOfChapters = module.getListOfChapters();
-        StructuredUtil.decrementConsecutiveNumber(chapter,listOfChapters);
+        StructuredUtil.decrementConsecutiveNumber(chapter, listOfChapters);
         listOfChapters.remove(chapter);
         deleteChapter(chapter);
     }
-
 
 
     public void editChapterInModule(Chapter chapter, Module module) {

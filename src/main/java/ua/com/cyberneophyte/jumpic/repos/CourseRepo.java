@@ -7,6 +7,6 @@ import ua.com.cyberneophyte.jumpic.domain.CourseInfo;
 import java.util.List;
 
 public interface CourseRepo extends JpaRepository<Course,Long>{
-    public Course findCourseById(Long id);
-    public Course findCourseByCourseInfo(CourseInfo courseInfo);
+    Course findCourseById(Long id);
+    Course findCourseByCourseInfo(CourseInfo courseInfo);
 }

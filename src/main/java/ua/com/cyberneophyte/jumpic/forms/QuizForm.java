@@ -4,16 +4,15 @@ import ua.com.cyberneophyte.jumpic.domain.Answer;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
 public class QuizForm {
     private Long id;
-    @Size(min = 3,max = 64,message = "{lesson.title.out.of.range}")
+    @Size(min = 3, max = 64, message = "{lesson.title.out.of.range}")
     private String title;
-    @Size(min = 3,max = 2500,message = "{quiz.question.out.of.range}")
+    @Size(min = 3, max = 2500, message = "{quiz.question.out.of.range}")
     private String question;
     @Min(1)
     @Max(5)

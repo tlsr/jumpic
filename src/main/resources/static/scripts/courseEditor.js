@@ -28,7 +28,7 @@ editChapterModalBtn.click(function () {
     let moduleId = $(this).data("module-id");
     let chapterId = $(this).data("chapter-id");
     console.log("module "+moduleId);
-    console.log("chapter "+chapterId)
+    console.log("chapter "+chapterId);
     let link =window.location.pathname + '/'+moduleId+'/'+'editChapter/'+chapterId;
     let oldModuleName = $('.chapter-container').find('#'+chapterId).text();
     modalWindowForChapter.find('#exampleModalLabel').text("Edit chapter");

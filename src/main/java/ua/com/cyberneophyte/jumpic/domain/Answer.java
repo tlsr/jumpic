@@ -45,13 +45,4 @@ public class Answer {
         this.quiz = quiz;
     }
 
-    @Override
-    public String toString() {
-        return "Answer{" +
-                "id=" + id +
-                ", answerText='" + answerText + '\'' +
-                ", isCorrect=" + isCorrect +
-                ", " +
-                '}';
-    }
 }

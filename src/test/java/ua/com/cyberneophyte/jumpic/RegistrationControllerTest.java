@@ -111,7 +111,6 @@ public class RegistrationControllerTest {
     }
 
     @Test
-    @Disabled
     public void registrUserWithShortPasswordTest() throws Exception{
         newUserParams.remove("password");
         newUserParams.remove("confirmPassword");
@@ -126,7 +125,6 @@ public class RegistrationControllerTest {
     }
 
     @Test
-    @Disabled //for test
     public void registrUserWithPasswordThatDoesntMatchPatternTest() throws Exception{
         newUserParams.remove("password");
         newUserParams.remove("confirmPassword");

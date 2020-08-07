@@ -27,29 +27,28 @@ public class CourseInfoEditorController {
 
 
     @GetMapping("/courseInfoEditor")
-    public String getCourseEditorPage(CourseInfoForm courseInfoForm){
+    public String getCourseEditorPage(CourseInfoForm courseInfoForm) {
         return "courseInfoEditor";
     }
 
     @PostMapping("/courseInfoEditor")
     public String submitForm(Model model, @Valid CourseInfoForm courseInfoForm,
-                             BindingResult bindingResult, Authentication authentication){
-        User user =(User) authentication.getPrincipal();
-        courseInfoValidator.validate(courseInfoForm,bindingResult);
+                             BindingResult bindingResult, Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        courseInfoValidator.validate(courseInfoForm, bindingResult);
         if (bindingResult.hasErrors()) {
             return "courseInfoEditor";
         } else {
             Course course = courseService.createCourseFromCourseInfoForm(courseInfoForm, user);
             courseService.saveCourse(course);
-            return "redirect:/courseView/"+course.getCourseInfo().getId();
+            return "redirect:/courseView/" + course.getCourseInfo().getId();
         }
     }
 
 
-
     @GetMapping("/courseView/{courseInfo}")
-    public String displayCourse(Model model, CourseInfo courseInfo){
-        model.addAttribute("courseInfo",courseInfo);
+    public String displayCourse(Model model, CourseInfo courseInfo) {
+        model.addAttribute("courseInfo", courseInfo);
         return "courseView";
     }
 

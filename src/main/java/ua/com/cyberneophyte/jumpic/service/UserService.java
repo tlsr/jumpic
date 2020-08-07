@@ -21,9 +21,8 @@ public class UserService implements UserDetailsService {
     @Lazy
     @Autowired
     private PasswordEncoder passwordEncoder;
-//@Lazy PasswordEncoder passwordEncoder  this.passwordEncoder = passwordEncoder;
-    public UserService(UserRepo userRepo) {
 
+    public UserService(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
 

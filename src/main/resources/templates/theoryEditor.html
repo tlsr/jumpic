@@ -11,7 +11,7 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 <div class="content">
-    <form th:object="${theoryForm}" th:action="@{${acctionLink}}" th:method="post">
+    <form th:object="${theoryForm}" th:action="@{${actionLink}}" th:method="post">
         <div class="col-md ">
             <label>Short title</label>
             <input type="hidden" th:field="*{id}"/>

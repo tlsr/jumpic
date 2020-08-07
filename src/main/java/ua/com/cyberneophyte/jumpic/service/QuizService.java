@@ -2,7 +2,10 @@ package ua.com.cyberneophyte.jumpic.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.com.cyberneophyte.jumpic.domain.*;
+import ua.com.cyberneophyte.jumpic.domain.Answer;
+import ua.com.cyberneophyte.jumpic.domain.Chapter;
+import ua.com.cyberneophyte.jumpic.domain.Lesson;
+import ua.com.cyberneophyte.jumpic.domain.Quiz;
 import ua.com.cyberneophyte.jumpic.forms.QuizForm;
 import ua.com.cyberneophyte.jumpic.repos.AnswerRepo;
 import ua.com.cyberneophyte.jumpic.repos.ChapterRepo;
@@ -13,23 +16,20 @@ import java.util.List;
 @Service
 @Transactional
 public class QuizService {
-    private final LessonService lessonService;
     private final ChapterRepo chapterRepo;
     private final QuizRepo quizRepo;
     private final AnswerRepo answerRepo;
 
 
-    public QuizService(LessonService lessonService, ChapterRepo chapterRepo, QuizRepo quizRepo, AnswerRepo answerRepo) {
-        this.lessonService = lessonService;
+    public QuizService(ChapterRepo chapterRepo, QuizRepo quizRepo, AnswerRepo answerRepo) {
         this.chapterRepo = chapterRepo;
         this.quizRepo = quizRepo;
         this.answerRepo = answerRepo;
     }
 
-    public Quiz createQuizeFromQuizForm(QuizForm quizForm){
+    public Quiz createQuizFromQuizForm(QuizForm quizForm) {
         Quiz quiz = new Quiz();
-        System.out.println("in form service quizform.answers: "+quizForm.getAnswers());
-        for (Answer answer: quizForm.getAnswers()) {
+        for (Answer answer : quizForm.getAnswers()) {
             answer.setQuiz(quiz);
         }
         quiz.setId(quizForm.getId());
@@ -40,9 +40,20 @@ public class QuizService {
         return quiz;
     }
 
+    public QuizForm createQuizFormFromLessonId(Long lessonId) {
+        QuizForm quizForm = new QuizForm();
+        Quiz quiz = findQuizById(lessonId);
+        quizForm.setId(quiz.getId());
+        quizForm.setAnswers(quiz.getAnswers());
+        quizForm.setQuestion(quiz.getQuestion());
+        quizForm.setTitle(quiz.getTitle());
+        quizForm.setPoints(quiz.getPoints());
+        return quizForm;
+    }
+
     public void addQuizToChapter(Quiz quiz, Chapter chapter) {
         List<Lesson> listOfLessons = chapterRepo.findChapterById(chapter.getId()).getListOfLessons();
-        StructuredUtil.incrementConsecutiveNumber(quiz,listOfLessons);
+        StructuredUtil.incrementConsecutiveNumber(quiz, listOfLessons);
         quiz.setChapter(chapter);
         listOfLessons.add(quiz);
         List<Answer> answers = quiz.getAnswers();
@@ -50,7 +61,7 @@ public class QuizService {
         quizRepo.save(quiz);
     }
 
-    public Quiz findQuizeById(Long id) {
+    public Quiz findQuizById(Long id) {
         return quizRepo.findQuizById(id);
     }
 
@@ -62,30 +73,14 @@ public class QuizService {
                 )
                 .findFirst()
                 .orElse(null);
-
-        System.out.println(oldQuiz);
-
         List<Answer> oldQuizAnswers = oldQuiz.getAnswers();
         oldQuizAnswers.clear();
         oldQuizAnswers.addAll(quiz.getAnswers());
-
-       // oldQuiz.setAnswers(quiz.getAnswers());
         oldQuiz.setQuestion(quiz.getQuestion());
         oldQuiz.setTitle(quiz.getTitle());
         List<Answer> answers = quiz.getAnswers();
-//        answerRepo.deleteAnswersByQuizId(quiz.getId());
         answerRepo.saveAll(answers);
         saveQuiz(oldQuiz);
-       /* List<Lesson> listOfChapters = chapter.getListOfLessons();
-        Theory oldTheory = (Theory) listOfChapters.stream()
-                .filter(lesson ->
-                        lesson.getId().equals(theory.getId())
-                )
-                .findFirst()
-                .orElse(null);
-        oldTheory.setContent(theory.getContent());
-        oldTheory.setTitle(theory.getTitle());
-        saveTheory(oldTheory);*/
     }
 
     public void saveQuiz(Quiz quiz) {

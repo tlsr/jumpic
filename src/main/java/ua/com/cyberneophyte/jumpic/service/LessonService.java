@@ -4,8 +4,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.cyberneophyte.jumpic.domain.Chapter;
 import ua.com.cyberneophyte.jumpic.domain.Lesson;
-import ua.com.cyberneophyte.jumpic.domain.Theory;
-import ua.com.cyberneophyte.jumpic.forms.TheoryForm;
 import ua.com.cyberneophyte.jumpic.repos.ChapterRepo;
 import ua.com.cyberneophyte.jumpic.repos.LessonRepo;
 
@@ -23,32 +21,27 @@ public class LessonService {
         this.chapterRepo = chapterRepo;
     }
 
-    public void addLessonToChapter(Lesson lesson, Chapter chapter){
+    public void addLessonToChapter(Lesson lesson, Chapter chapter) {
         List<Lesson> listOfLessons = chapterRepo.findChapterById(chapter.getId()).getListOfLessons();
-        StructuredUtil.incrementConsecutiveNumber(lesson,listOfLessons);
+        StructuredUtil.incrementConsecutiveNumber(lesson, listOfLessons);
         lesson.setChapter(chapter);
         listOfLessons.add(lesson);
         lessonRepo.save(lesson);
     }
 
 
-
     public void deleteLessonFromChapter(Lesson lesson, Chapter chapter) {
         List<Lesson> listOfLessons = chapter.getListOfLessons();
-        System.out.println("bu!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println(lesson.getId());
-        StructuredUtil.decrementConsecutiveNumber(lesson,listOfLessons);
+        StructuredUtil.decrementConsecutiveNumber(lesson, listOfLessons);
         listOfLessons.remove(lesson);
         deleteLesson(lesson);
     }
 
-    public void deleteLesson(Lesson lesson){
-        System.out.println("bu!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println(lesson.getId());
+    public void deleteLesson(Lesson lesson) {
         lessonRepo.deleteLessonById(lesson.getId());
     }
 
-    public Lesson findLessonById(Long lessonId){
+    public Lesson findLessonById(Long lessonId) {
         return lessonRepo.findLessonById(lessonId);
     }
 }

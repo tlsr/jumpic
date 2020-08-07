@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "modules")
-public class Module implements Structured{
+public class Module implements Structured {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,6 +17,13 @@ public class Module implements Structured{
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
+
+    public Module() {
+    }
+
+    public Module(String moduleName) {
+        this.moduleName = moduleName;
+    }
 
     public List<Chapter> getListOfChapters() {
         return listOfChapters;
@@ -34,13 +41,6 @@ public class Module implements Structured{
         this.course = course;
     }
 
-    public Module() {
-    }
-
-    public Module(String moduleName) {
-        this.moduleName  =moduleName;
-    }
-
     public Long getId() {
         return id;
     }
@@ -56,7 +56,6 @@ public class Module implements Structured{
     public void setModuleName(String moduleName) {
         this.moduleName = moduleName;
     }
-
 
     public Integer getPoints() {
         return points;

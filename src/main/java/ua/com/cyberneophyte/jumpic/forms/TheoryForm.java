@@ -1,13 +1,12 @@
 package ua.com.cyberneophyte.jumpic.forms;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class TheoryForm {
     private Long id;
-    @Size(min = 3,max = 64,message = "{lesson.title.out.of.range}")
+    @Size(min = 3, max = 64, message = "{lesson.title.out.of.range}")
     private String title;
-    @Size(min = 3,max = 2500,message = "{theory.content.out.of.range}")
+    @Size(min = 3, max = 2500, message = "{theory.content.out.of.range}")
     private String content;
 
     public Long getId() {

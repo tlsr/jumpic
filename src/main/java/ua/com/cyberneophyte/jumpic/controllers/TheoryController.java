@@ -18,29 +18,20 @@ import javax.validation.Valid;
 @RequestMapping("/courseEditor/{course}/{module}/{chapter}")
 public class TheoryController {
     private final LessonService lessonService;
-    private final ChapterRepo chapterRepo;
     private final TheoryService theoryService;
 
 
-    public TheoryController(LessonService lessonService, ChapterRepo chapterRepo, TheoryService theoryService) {
+    public TheoryController(LessonService lessonService,  TheoryService theoryService) {
         this.lessonService = lessonService;
-        this.chapterRepo = chapterRepo;
         this.theoryService = theoryService;
     }
 
     @GetMapping(value = "/theoryEditor")
     public String showTheoryEditorForAdding(Model model, Chapter chapter, TheoryForm theoryForm) {
         model.addAttribute("theoryForm", theoryForm);
-        model.addAttribute("acctionLink","addTheoryLesson");
+        model.addAttribute("actionLink", "addTheoryLesson");
         return "theoryEditor";
     }
-
-  /*  @RequestMapping(value = "/theoryEditor")
-    public String showTheoryEditorForEditing(Model model, Chapter chapter, TheoryForm theoryForm) {
-        model.addAttribute("theoryForm", theoryForm);
-        model.addAttribute("acctionLink","editTheoryLesson");
-        return "/theoryEditor";
-    }*/
 
     @PostMapping("/addTheoryLesson")
     public String addTheoryLessonToChapter(Model model,
@@ -72,13 +63,12 @@ public class TheoryController {
         theoryService.editTheoryLessonInChapter(theory, chapter);
         return "redirect:/courseEditor/{course}";
     }
-    @GetMapping(value = "/{lesson}/edditTheory" )
+
+    @GetMapping(value = "/{lesson}/editTheory")
     public String editTheoryInChapterShowForm(TheoryForm theoryForm, Model model, Chapter chapter, Lesson lesson) {
-        Theory theory = (Theory) lessonService.findLessonById(lesson.getId());
-        theoryForm.setContent(theory.getContent());
-        theoryForm.setTitle(theory.getTitle());
-        theoryForm.setId(theory.getId());
-        model.addAttribute("acctionLink","editTheoryLesson");
+        theoryForm = theoryService.createTheoryFormFromLessonId(lesson.getId());
+        model.addAttribute("theoryForm",theoryForm);
+        model.addAttribute("actionLink", "editTheoryLesson");
         return "theoryEditor";
     }
 }

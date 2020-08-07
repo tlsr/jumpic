@@ -4,11 +4,10 @@ import javax.persistence.*;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Entity
 @Table(name = "chapters")
-public class Chapter implements Structured{
+public class Chapter implements Structured {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +19,7 @@ public class Chapter implements Structured{
     @JoinColumn(name = "module_id")
     private Module module;
 
-    public List<Lesson> getOrderedListOfLessons(){
+    public List<Lesson> getOrderedListOfLessons() {
         List<Lesson> sortedList = listOfLessons.stream()
                 .sorted(Comparator.comparingInt(Lesson::getConsecutiveNumber))
                 .collect(Collectors.toList());

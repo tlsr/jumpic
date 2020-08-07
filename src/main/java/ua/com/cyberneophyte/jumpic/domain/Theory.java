@@ -1,6 +1,9 @@
 package ua.com.cyberneophyte.jumpic.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "theory")
@@ -12,8 +15,8 @@ public class Theory extends Lesson {
     public Theory() {
     }
 
-    public Theory(Long id,String title, String content) {
-        super(id,title);
+    public Theory(Long id, String title, String content) {
+        super(id, title);
         this.content = content;
     }
 
@@ -25,10 +28,4 @@ public class Theory extends Lesson {
         this.content = content;
     }
 
-    @Override
-    public String toString() {
-        return super.toString()+"Theory{" +
-                "content='" + content + '\'' +
-                '}';
-    }
 }

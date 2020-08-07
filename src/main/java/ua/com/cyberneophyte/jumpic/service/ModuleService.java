@@ -22,32 +22,31 @@ public class ModuleService {
     }
 
 
-
     public void deleteModule(Module module) {
         moduleRepo.deleteModuleById(module.getId());
     }
 
-    public void saveModule(Module module){
+    public void saveModule(Module module) {
         moduleRepo.save(module);
     }
 
     public void addModuleToCourse(Module module, Course course) {
         List<Module> listOfModules = courseRepo.findCourseById(course.getId()).getListOfModules();
-        StructuredUtil.incrementConsecutiveNumber(module,listOfModules);
+        StructuredUtil.incrementConsecutiveNumber(module, listOfModules);
         listOfModules.add(module);
         saveModule(module);
     }
 
     public void deleteModuleFromCourse(Module module, Course course) {
         List<Module> listOfModules = course.getListOfModules();
-        StructuredUtil.decrementConsecutiveNumber(module,listOfModules);
+        StructuredUtil.decrementConsecutiveNumber(module, listOfModules);
         listOfModules.remove(module);
         deleteModule(module);
     }
 
     public void deleteModuleFromCourseById(Long moduleId, Course course) {
         Module module = moduleRepo.findModuleById(moduleId);
-        deleteModuleFromCourse(module,course);
+        deleteModuleFromCourse(module, course);
     }
 
     public void editModuleInCourse(Module module, Course course) {

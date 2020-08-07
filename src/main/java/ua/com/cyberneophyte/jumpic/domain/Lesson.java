@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Lesson  implements  Structured{
+public class Lesson implements Structured {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,7 +17,7 @@ public class Lesson  implements  Structured{
     public Lesson() {
     }
 
-    public Lesson(Long id,String title) {
+    public Lesson(Long id, String title) {
         this.id = id;
         this.title = title;
     }
@@ -54,13 +54,4 @@ public class Lesson  implements  Structured{
         this.chapter = chapter;
     }
 
-    @Override
-    public String toString() {
-        return "Lesson{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", consecutiveNumber=" + consecutiveNumber +
-                ", chapter=" + chapter +
-                '}';
-    }
 }

@@ -1,6 +1,9 @@
 package ua.com.cyberneophyte.jumpic.forms;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class CourseInfoForm {
     @Size(min = 3, max = 64, message = "{courseInfo.title.outside.range}")

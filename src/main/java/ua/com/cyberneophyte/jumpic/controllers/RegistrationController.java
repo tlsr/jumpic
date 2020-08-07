@@ -18,7 +18,7 @@ public class RegistrationController {
     private final UserService userService;
     private final Validator registrationFormValidator;
 
-    public RegistrationController(UserService userService ,UserRepo userRepo, @Qualifier("registrationFormValidator") Validator registrationFormValidator) {
+    public RegistrationController(UserService userService, UserRepo userRepo, @Qualifier("registrationFormValidator") Validator registrationFormValidator) {
         this.userService = userService;
         this.registrationFormValidator = registrationFormValidator;
     }
@@ -39,7 +39,6 @@ public class RegistrationController {
         }
         return "redirect:/login";
     }
-
 
 
 }

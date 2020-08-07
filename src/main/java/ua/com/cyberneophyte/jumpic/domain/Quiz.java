@@ -2,7 +2,6 @@ package ua.com.cyberneophyte.jumpic.domain;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Table(name = "quiz")
@@ -10,7 +9,7 @@ import java.util.Map;
 public class Quiz extends Lesson {
     @Lob
     private String question;
-    @OneToMany(mappedBy = "quiz", fetch = FetchType.EAGER,orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "quiz", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.PERSIST)
     private List<Answer> answers;
     private Integer points;
 
@@ -38,11 +37,4 @@ public class Quiz extends Lesson {
         this.answers = answers;
     }
 
-    @Override
-    public String toString() {
-        return "Quiz{" +
-                "question='" + question + '\'' +
-                ", answers=" + answers +
-                '}';
-    }
 }

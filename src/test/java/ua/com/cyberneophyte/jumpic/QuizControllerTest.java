@@ -282,8 +282,8 @@ public class QuizControllerTest {
     public void showEditFormForQuizTest() throws Exception {
         this.mockMvc.perform(get("/courseEditor/1/1/1/1/editLesson/").with(csrf()))
                 .andDo(print())
-                .andExpect(redirectedUrl("/courseEditor/1/1/1/1/edditQuiz"));
-        this.mockMvc.perform(get("/courseEditor/1/1/1/1/edditQuiz").with(csrf()))
+                .andExpect(redirectedUrl("/courseEditor/1/1/1/1/editQuiz"));
+        this.mockMvc.perform(get("/courseEditor/1/1/1/1/editQuiz").with(csrf()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(model()

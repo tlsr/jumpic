@@ -13,7 +13,7 @@ public class AnswerService {
         this.answerRepo = answerRepo;
     }
 
-    public void deleteAnswerById(Long answerId){
+    public void deleteAnswerById(Long answerId) {
         answerRepo.deleteAnswersById(answerId);
     }
 }

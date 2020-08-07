@@ -23,8 +23,8 @@ public class CourseInfoValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         CourseInfoForm courseInfoForm = (CourseInfoForm) o;
-        if(courseInfoRepo.findCourseInfoByTitle(courseInfoForm.getTitle())!=null){
-            errors.rejectValue("title","courseInfo.title.course.exists");
+        if (courseInfoRepo.findCourseInfoByTitle(courseInfoForm.getTitle()) != null) {
+            errors.rejectValue("title", "courseInfo.title.course.exists");
         }
 
     }

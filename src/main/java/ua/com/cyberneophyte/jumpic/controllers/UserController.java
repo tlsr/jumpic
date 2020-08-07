@@ -21,23 +21,23 @@ public class UserController {
     }
 
     @GetMapping
-    public String userList(Model model){
+    public String userList(Model model) {
         model.addAttribute("users", userRepo.findAll());
         return "userList";
     }
 
     @GetMapping("{user}")
-    public String editUser(Model model, User user, Role role){
-        model.addAttribute("user",user);
-        model.addAttribute("roles",Role.values());
+    public String editUser(Model model, User user, Role role) {
+        model.addAttribute("user", user);
+        model.addAttribute("roles", Role.values());
         return "useredit";
     }
 
     @PostMapping("{user}")
     public String updateUser(User user,
-                             Model model){
-        model.addAttribute("user",user);
-        model.addAttribute("roles",Role.values());
+                             Model model) {
+        model.addAttribute("user", user);
+        model.addAttribute("roles", Role.values());
         userRepo.save(user);
         return "useredit";
     }

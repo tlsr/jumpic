@@ -1,7 +1,6 @@
 package ua.com.cyberneophyte.jumpic.domain;
 
 import javax.persistence.*;
-import java.util.LinkedList;
 import java.util.List;
 
 @Entity

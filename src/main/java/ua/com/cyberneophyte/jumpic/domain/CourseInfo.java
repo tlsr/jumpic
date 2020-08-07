@@ -3,7 +3,6 @@ package ua.com.cyberneophyte.jumpic.domain;
 import ua.com.cyberneophyte.jumpic.forms.CourseInfoForm;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,11 +19,6 @@ public class CourseInfo {
     @JoinColumn(name = "user_id")
     private User author;
     private String title;
-   /* @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "course_tags",
-            joinColumns = @JoinColumn(name = "courseInfo_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id")
-    )*/
     @ElementCollection
     @CollectionTable(name = "course_tags", joinColumns = @JoinColumn(name = "courseInfo_id"))
     @Column(name = "tag")
@@ -45,7 +39,7 @@ public class CourseInfo {
     public CourseInfo() {
     }
 
-    public CourseInfo(CourseInfoForm courseInfoForm,User user,Course course){
+    public CourseInfo(CourseInfoForm courseInfoForm, User user, Course course) {
         this.setEstimatedTimeToFinish(courseInfoForm.getEstimatedTimeToFinish());
         this.setTitle(courseInfoForm.getTitle());
         this.setAuthor(user);

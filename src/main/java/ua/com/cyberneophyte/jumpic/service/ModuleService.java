@@ -12,9 +12,10 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ModuleService {
+public class ModuleService implements ICRUDService<Module> {
     private ModuleRepo moduleRepo;
     private CourseRepo courseRepo;
+
 
     public ModuleService(ModuleRepo moduleRepo, CourseRepo courseRepo) {
         this.moduleRepo = moduleRepo;
@@ -58,6 +59,16 @@ public class ModuleService {
                 temp.setModuleName(module.getModuleName());
             }
         }
+        saveModule(module);
+    }
+
+    @Override
+    public void delete(Module module) {
+        deleteModule(module);
+    }
+
+    @Override
+    public void save(Module module) {
         saveModule(module);
     }
 }

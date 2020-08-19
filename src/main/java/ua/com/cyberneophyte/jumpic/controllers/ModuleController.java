@@ -9,15 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ua.com.cyberneophyte.jumpic.domain.Chapter;
 import ua.com.cyberneophyte.jumpic.domain.Course;
 import ua.com.cyberneophyte.jumpic.domain.Module;
+import ua.com.cyberneophyte.jumpic.service.Helper;
 import ua.com.cyberneophyte.jumpic.service.ModuleService;
 
 @Controller
 @RequestMapping("/courseEditor")
 public class ModuleController {
     private final ModuleService moduleService;
+    private final Helper<Module> helper;
 
-    public ModuleController(ModuleService moduleService) {
+    public ModuleController(ModuleService moduleService, Helper<Module> helper) {
         this.moduleService = moduleService;
+        this.helper = helper;
     }
 
     @GetMapping("/{course}")
@@ -41,7 +44,8 @@ public class ModuleController {
 
     @PostMapping("/{course}/deleteModule/{module}")
     public String deleteModuleFromCourse(Model model, Module module, Course course) {
-        moduleService.deleteModuleFromCourse(module, course);
+       // moduleService.deleteModuleFromCourse(module, course);
+        helper.deleteElementFromList(module,course.getListOfModules());
         return "redirect:/courseEditor/{course}";
     }
 

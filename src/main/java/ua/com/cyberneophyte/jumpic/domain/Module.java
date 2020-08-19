@@ -1,11 +1,15 @@
 package ua.com.cyberneophyte.jumpic.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import ua.com.cyberneophyte.jumpic.service.ICRUDService;
+import ua.com.cyberneophyte.jumpic.service.ModuleService;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "modules")
-public class Module implements Structured {
+public class Module implements Structured,ICRUDServiceGiver {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,6 +21,9 @@ public class Module implements Structured {
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
+    @Autowired
+    @Transient
+    private ModuleService moduleService;
 
     public Module() {
     }
@@ -71,5 +78,10 @@ public class Module implements Structured {
 
     public void setConsecutiveNumber(Integer order) {
         this.consecutiveNumber = order;
+    }
+
+    @Override
+    public ICRUDService getICRUDService() {
+        return moduleService;
     }
 }

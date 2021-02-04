@@ -1,7 +1,8 @@
 # jumpic
 
-This project was created in aim to improve my coding skills and try some new stuff.
-The project represents an educational platform where you can create/join courses.<br>
+<p>This project was created in aim to improve my coding skills and try some new stuff.
+The project represents an educational platform where you can create/join courses.</p>
+<p>
 Technologies used in this project:
 <ul>
   <li>Spring(MVC,Data, Security)</li>
@@ -11,9 +12,12 @@ Technologies used in this project:
   <li>MySQL</li>
   <li>Flyway</li>
 </ul>
+</p>
+<p>
 Functionality available so far:
 <ul>
   <li>Registration</li>
   <li>Admin page</li>
   <li>Creating/editing courses</li>
 </ul>
+</p>
